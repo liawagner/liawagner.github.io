@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Int on Hugo Skeleton Theme Site</title>
-    <link>http://liawagner.github.io/tags/int/index.xml</link>
+    <link>http://geeky.lightinasia.org/tags/int/index.xml</link>
     <description>Recent content in Int on Hugo Skeleton Theme Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-ie</language>
-    <atom:link href="http://liawagner.github.io/tags/int/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://geeky.lightinasia.org/tags/int/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>A page</title>
-      <link>http://liawagner.github.io/a-page/</link>
+      <link>http://geeky.lightinasia.org/a-page/</link>
       <pubDate>Sat, 04 Feb 2017 19:25:17 +0800</pubDate>
       
-      <guid>http://liawagner.github.io/a-page/</guid>
+      <guid>http://geeky.lightinasia.org/a-page/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Lorem ipsum dolor&lt;/strong&gt; sit amet, consectetur adipiscing elit. Aliquam tristique vulputate leo, in molestie lorem luctus vitae. In ut odio faucibus, ultricies erat quis, efficitur tortor. Etiam justo velit, interdum in orci suscipit, varius venenatis mauris. In congue aliquam eros. Suspendisse potenti. Donec fermentum sagittis odio nec pharetra. Etiam quis vulputate elit, in venenatis massa. Proin lacinia porta ante, ut laoreet nulla facilisis placerat. Mauris nec ex blandit massa iaculis euismod ac eget purus.&lt;/p&gt;
 
 &lt;p&gt;In sollicitudin, ante eget feugiat hendrerit, lacus eros auctor ligula, eget ultrices sapien libero sed quam. Sed nunc ante, vehicula sit amet placerat vitae, congue interdum purus. Quisque tellus ipsum, malesuada non rhoncus at, dignissim in dolor. Maecenas dui enim, ornare eu massa vel, viverra scelerisque urna. Praesent diam lacus, ullamcorper ut porttitor vel, ultrices ac erat. Vivamus id hendrerit diam, sed sagittis ipsum. Curabitur elementum lectus leo, at ultrices urna blandit non.&lt;/p&gt;
