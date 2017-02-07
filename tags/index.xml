@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>HUGO SKELETON SITE</title>
+    <title>Hugo Skeleton Theme Site</title>
     <link>https://liawagner.github.io/tags/index.xml</link>
-    <description>Recent content on HUGO SKELETON SITE</description>
+    <description>Recent content on Hugo Skeleton Theme Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-ie</language>
     <atom:link href="https://liawagner.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
