@@ -2,61 +2,72 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://hugo.spf13.com/blog/creating-a-new-theme/</loc>
+    <loc>/contact/</loc>
+    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/creating-a-new-theme/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2014-04-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/blog/goisforlovers/</loc>
+    <loc>/blog/goisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/blog/hugoisforlovers/</loc>
+    <loc>/blog/hugoisforlovers/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/blog/migrate-from-jekyll/</loc>
+    <loc>/blog/migrate-from-jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/blog/</loc>
+    <loc>/categories/</loc>
+    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/blog/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/categories/go/</loc>
+    <loc>/categories/go/</loc>
     <lastmod>2014-04-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/categories/hugo/</loc>
+    <loc>/categories/hugo/</loc>
     <lastmod>2014-09-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hugo.spf13.com/categories/jekyll/</loc>
+    <loc>/categories/jekyll/</loc>
     <lastmod>2014-03-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
