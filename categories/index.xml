@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo Future Imperfect</title>
-    <link>/categories/index.xml</link>
+    <link>/liawagner.github.io/categories/index.xml</link>
     <description>Recent content on Hugo Future Imperfect</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/liawagner.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Contact</title>
-      <link>/contact/</link>
+      <link>/liawagner.github.io/contact/</link>
       <pubDate>Fri, 10 Feb 2017 01:12:23 +0800</pubDate>
       
-      <guid>/contact/</guid>
+      <guid>/liawagner.github.io/contact/</guid>
       <description>
 
 &lt;h1 id=&#34;authentic-sustainable&#34;&gt;Authentic sustainable&lt;/h1&gt;

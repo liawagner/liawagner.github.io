@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>go on Hugo Future Imperfect</title>
-    <link>/categories/go/index.xml</link>
+    <link>/liawagner.github.io/categories/go/index.xml</link>
     <description>Recent content in go on Hugo Future Imperfect</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/liawagner.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>(Hu)go Template Primer</title>
-      <link>/blog/goisforlovers/</link>
+      <link>/liawagner.github.io/blog/goisforlovers/</link>
       <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
       
-      <guid>/blog/goisforlovers/</guid>
+      <guid>/liawagner.github.io/blog/goisforlovers/</guid>
       <description>
 
 &lt;p&gt;Hugo uses the excellent &lt;a href=&#34;http://golang.org/&amp;gt;&#34;&gt;go&lt;/a&gt; &lt;a href=&#34;http://golang.org/pkg/html/template/&amp;gt;&#34;&gt;html/template&lt;/a&gt; library for
