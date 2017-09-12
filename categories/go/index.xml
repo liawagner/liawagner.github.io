@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>internet on Hugo Future Imperfect</title>
-    <link>/liawagner.github.io/categories/internet/index.xml</link>
-    <description>Recent content in internet on Hugo Future Imperfect</description>
+    <title>go on Hugo Future Imperfect</title>
+    <link>/liawagner.github.io/categories/go/index.xml</link>
+    <description>Recent content in go on Hugo Future Imperfect</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/liawagner.github.io/categories/internet/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/liawagner.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</title>
+      <title>Globe misleading new Fiber subscribers about Data Cap!</title>
       <link>/liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/</link>
       <pubDate>Tue, 12 Sep 2017 16:11:27 +0000</pubDate>
       
