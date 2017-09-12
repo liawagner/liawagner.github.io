@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>go on Hugo Future Imperfect</title>
-    <link>/liawagner.github.io/categories/go/index.xml</link>
-    <description>Recent content in go on Hugo Future Imperfect</description>
+    <title>internet on Hugo Future Imperfect</title>
+    <link>/liawagner.github.io/categories/internet/index.xml</link>
+    <description>Recent content in internet on Hugo Future Imperfect</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="/liawagner.github.io/categories/go/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/liawagner.github.io/categories/internet/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Globe misleading new Fiber subscribers about Data Cap!</title>
+      <title>Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</title>
       <link>/liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/</link>
       <pubDate>Tue, 12 Sep 2017 16:11:27 +0000</pubDate>
       
@@ -29,7 +29,7 @@
 &lt;div style=&#34;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;border-radius:4px;border-image:none;background:white none repeat scroll 0% 0%;border-bottom-right-radius:0px;border-top-right-radius:0px;&#34;&gt;
 &lt;div style=&#34;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;&#34;&gt;
 &lt;div style=&#34;font-weight:inherit;font-style:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;overflow-x:auto;&#34;&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;Globe Telecom is misleading new Home Broadband Fiber subscribers about the 30% throttle after reaching their &#39;Data Cap&#39;, which should have been 6 Mbps for us. In reality they throttle to an unusable 400 kbps.&lt;br&gt;&lt;/p&gt;&lt;p&gt;We subscribed to Globe Fiber in Davao City on July 21, 2017.&lt;/p&gt;
+&lt;p&gt;We subscribed to Globe Fiber in Davao City on July 21, 2017.&lt;/p&gt;
 &lt;p&gt;The plan is advertised as follows:&lt;/p&gt;
 &lt;p&gt;&lt;span style=&#34;margin:0px;padding:0px;border:0px none;font-weight:inherit;font-style:inherit;font-size:14px;font-family:inherit;vertical-align:baseline;&#34;&gt;&lt;em&gt;Broadband Plan 1599 Go Fast 20Mbps, 150GB&lt;/em&gt;&lt;/span&gt;&lt;/p&gt;
 &lt;ul&gt;
