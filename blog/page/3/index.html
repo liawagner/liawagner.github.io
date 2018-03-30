@@ -1,11 +1,19 @@
+
+
+    
+
+
+    
+
+
+
+
 <!DOCTYPE HTML>
 
 <html>
     <head>
         
-            
-                <title>404 Page not found</title>
-            
+            <title>Blog - Hugo Future Imperfect</title>
         
 
         <meta charset="utf-8" />
@@ -22,13 +30,13 @@
         
 
         
-        <meta property="og:title" content="404 Page not found" />
+        <meta property="og:title" content="Blogs" />
 <meta property="og:description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="/liawagner.github.io/404/" />
+<meta property="og:url" content="/liawagner.github.io/blog/" />
 
 
-
+<meta property="og:updated_time" content="2014-03-10T00:00:00&#43;00:00"/>
 
 
 
@@ -39,7 +47,7 @@
 
 
         
-<meta itemprop="name" content="404 Page not found">
+<meta itemprop="name" content="Blogs">
 <meta itemprop="description" content="HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo">
 
 
@@ -54,11 +62,11 @@
 
         
         
-            <link rel="stylesheet" href="./css/google-font.css" />
-            <link rel="stylesheet" href="./css/font-awesome.min.css" />
-            <link rel="stylesheet" href="./css/main.css" />
-            <link rel="stylesheet" href="./css/add-on.css" />
-            <link rel="stylesheet" href="./css/monokai-sublime.css">
+            <link rel="stylesheet" href="../../../css/google-font.css" />
+            <link rel="stylesheet" href="../../../css/font-awesome.min.css" />
+            <link rel="stylesheet" href="../../../css/main.css" />
+            <link rel="stylesheet" href="../../../css/add-on.css" />
+            <link rel="stylesheet" href="../../../css/monokai-sublime.css">
         
 
         
@@ -77,33 +85,33 @@
     
 <header id="header">
     
-        <h2><a href="./">Future Imperfect</i></a></h2>
+        <h2><a href="../../../">Future Imperfect</i></a></h2>
     
 
     <nav class="links">
         <ul>
             
                 <li>
-                    <a href="./liawagner.github.io/blog">
+                    <a href="../../../liawagner.github.io/blog">
                         
                             <i class="fa fa-newspaper-o">&nbsp;</i>Blog
                     </a>
                 </li>
             
                 <li>
-                    <a href="./liawagner.github.io/categories">
+                    <a href="../../../liawagner.github.io/categories">
                         Categories
                     </a>
                 </li>
             
                 <li>
-                    <a href="./liawagner.github.io/contact/">
+                    <a href="../../../liawagner.github.io/contact/">
                         Contact
                     </a>
                 </li>
             
                 <li>
-                    <a href="./liawagner.github.io/about">
+                    <a href="../../../liawagner.github.io/about">
                         About
                     </a>
                 </li>
@@ -143,7 +151,7 @@
             <ul class="links">
                 
                     <li>
-                        <a href="./liawagner.github.io/blog">
+                        <a href="../../../liawagner.github.io/blog">
                             <h3>
                                 
                                     <i class="fa fa-newspaper-o">&nbsp;</i>
@@ -154,7 +162,7 @@
                     </li>
                 
                     <li>
-                        <a href="./liawagner.github.io/categories">
+                        <a href="../../../liawagner.github.io/categories">
                             <h3>
                                 
                                 Categories
@@ -163,7 +171,7 @@
                     </li>
                 
                     <li>
-                        <a href="./liawagner.github.io/contact/">
+                        <a href="../../../liawagner.github.io/contact/">
                             <h3>
                                 
                                 Contact
@@ -172,7 +180,7 @@
                     </li>
                 
                     <li>
-                        <a href="./liawagner.github.io/about">
+                        <a href="../../../liawagner.github.io/about">
                             <h3>
                                 
                                 About
@@ -195,11 +203,11 @@
 
                 
                     <li>
-                        <a href="./liawagner.github.io/blog/test-1/"><p>Test 1</p></a>
+                        <a href="../../../liawagner.github.io/blog/test-1/"><p>Test 1</p></a>
                     </li>
                 
                     <li>
-                        <a href="./liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/"><p>Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</p></a>
+                        <a href="../../../liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/"><p>Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</p></a>
                     </li>
                 
             </ul>
@@ -211,11 +219,99 @@
 
     
     <div id="main">
-        <article class="post">
-            <h1>
-                We're sorry, but that page can't be found <i class="fa fa-frown-o"></i>
-            </h1>
-        </article>
+        
+        
+            
+        
+
+        
+            <article class="post">
+    <header>
+    <div class="title">
+        
+            <h2><a href="../../../liawagner.github.io/blog/migrate-from-jekyll/">Migrate to Hugo from Jekyll</a></h2>
+        
+        
+    </div>
+    <div class="meta">
+        
+            
+        
+
+        <time class="published"
+            datetime='2014-03-10'>
+            March 10, 2014</time>
+        <span class="author">Migrating author</span>
+        
+        
+    </div>
+</header>
+
+    
+
+    <p><h2 id="move-static-content-to-static">Move static content to <code>static</code></h2>
+
+<p>Jekyll has a rule that any directory not starting with <code>_</code> will be copied as-is to the <code>_site</code> output. Hugo keeps all static content under <code>static</code>. You should therefore move it all there.
+With Jekyll, something that looked like</p>
+
+<pre><code>▾ &lt;root&gt;/
+    ▾ images/
+        logo.png
+</code></pre>
+</p>
+
+    <footer>
+        <ul class="actions">
+            <li><a href="../../../liawagner.github.io/blog/migrate-from-jekyll/" class="button big">Continue Reading</a></li>
+        </ul>
+        <ul class="stats">
+    
+        
+
+        
+        
+            <li>
+                
+                
+                    
+
+                    
+
+                    
+
+                    
+                        Categories
+                    
+                
+            </li>
+        
+    
+
+    
+    
+        <li><a href='../../../liawagner.github.io/categorieshugo'>Hugo</a></li>
+    
+        <li><a href='../../../liawagner.github.io/categoriesjekyll'>Jekyll</a></li>
+    
+</ul>
+
+    </footer>
+</article>
+
+        
+
+        
+<ul class="actions pagination">
+    
+        <li><a href="../../../liawagner.github.io/blog/page/2/"
+                class="button big previous">Previous Page</a></li>
+    
+
+    
+        <li><a href="#" class="disabled button big next">Next Page</a></li>
+    
+</ul>
+
     </div>
     
 <section id="sidebar">
@@ -225,7 +321,7 @@
             
             
                 
-                    <a href="./" class="logo"><img src="./img/main/logo.jpg" alt="Hugo Future Imperfect" /></a>
+                    <a href="../../../" class="logo"><img src="../../../img/main/logo.jpg" alt="Hugo Future Imperfect" /></a>
                 
             
             
@@ -236,7 +332,7 @@
             
             <ul class="icons">
                 
-                    <li><a href="liawagner.github.io/404.html/index.xml" type="application/rss+xml"
+                    <li><a href="liawagner.github.io/blog/index.xml" type="application/rss+xml"
                         target="_blank" title="RSS" class="fa fa-rss"></a></li>
                 
                 
@@ -316,7 +412,7 @@
                     <li>
                         <article>
                             <header>
-                                <h3><a href="./liawagner.github.io/blog/test-1/">Test 1</a></h3>
+                                <h3><a href="../../../liawagner.github.io/blog/test-1/">Test 1</a></h3>
                                 
                                     
                                 
@@ -330,7 +426,7 @@
                     <li>
                         <article>
                             <header>
-                                <h3><a href="./liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/">Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</a></h3>
+                                <h3><a href="../../../liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/">Globe misleading new Fiber subscribers about 30% Throttle after reaching Data Cap!</a></h3>
                                 
                                     
                                 
@@ -363,7 +459,7 @@
         <section id="categories">
             <ul class="posts">
                 <header>
-                    <h3><a href="./categories/">Categories</a></h3>
+                    <h3><a href="../../../categories/">Categories</a></h3>
                 </header>
 
                 
@@ -374,7 +470,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories/hugo/">Hugo</a>
+                                <a href="../../../categories/hugo/">Hugo</a>
                                 <span style="float:right;">3</span>
                             </header>
                         </article>
@@ -383,7 +479,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories/go/">Go</a>
+                                <a href="../../../categories/go/">Go</a>
                                 <span style="float:right;">2</span>
                             </header>
                         </article>
@@ -392,7 +488,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories//"></a>
+                                <a href="../../../categories//"></a>
                                 <span style="float:right;">1</span>
                             </header>
                         </article>
@@ -401,7 +497,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories/jekyll/">Jekyll</a>
+                                <a href="../../../categories/jekyll/">Jekyll</a>
                                 <span style="float:right;">1</span>
                             </header>
                         </article>
@@ -410,7 +506,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories/life/">Life</a>
+                                <a href="../../../categories/life/">Life</a>
                                 <span style="float:right;">1</span>
                             </header>
                         </article>
@@ -419,7 +515,7 @@
                     <li>
                         <article>
                             <header>
-                                <a href="./categories/internet/">internet</a>
+                                <a href="../../../categories/internet/">internet</a>
                                 <span style="float:right;">1</span>
                             </header>
                         </article>
@@ -436,7 +532,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tellus lacus, auctor vehicula molestie quis, tempor quis velit. Quisque in quam ac leo efficitur vulputate. Phasellus ullamcorper aliquam sodales. Maecenas sit amet condimentum ipsum. Proin sit amet ligula elit. Mauris.</p>
 
             <ul class="actions">
-                <li><a href="./about/" class="button">Learn More</a></li>
+                <li><a href="../../../about/" class="button">Learn More</a></li>
             </ul>
         </section>
         
@@ -445,7 +541,7 @@
         <section id="footer">
             <ul class="icons">
                 
-                    <li><a href="liawagner.github.io/404.html/index.xml" type="application/rss+xml"
+                    <li><a href="liawagner.github.io/blog/index.xml" type="application/rss+xml"
                         target="_blank" title="RSS" class="fa fa-rss"></a></li>
                 
                 
@@ -522,12 +618,12 @@
 
         
         
-            <script src="./js/jquery.min.js"></script>
-            <script src="./js/skel.min.js"></script>
-            <script src="./js/util.js"></script>
-            <script src="./js/main.js"></script>
-            <script src="./js/backToTop.js"></script>
-            <script src="./js/highlight.pack.js"></script>
+            <script src="../../../js/jquery.min.js"></script>
+            <script src="../../../js/skel.min.js"></script>
+            <script src="../../../js/util.js"></script>
+            <script src="../../../js/main.js"></script>
+            <script src="../../../js/backToTop.js"></script>
+            <script src="../../../js/highlight.pack.js"></script>
         
 
         
