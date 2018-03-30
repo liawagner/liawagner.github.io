@@ -6,19 +6,10 @@
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Mar 2018 08:53:49 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 30 Mar 2018 08:48:13 +0000</lastBuildDate>
     
 	<atom:link href="http://example.org/posts/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Test 3</title>
-      <link>http://example.org/posts/test-2/</link>
-      <pubDate>Fri, 30 Mar 2018 08:53:49 +0000</pubDate>
-      
-      <guid>http://example.org/posts/test-2/</guid>
-      <description>The Word Became Flesh! 1 In the beginning was the Word, and the Word was with God, and the Word was God. 2 He was with God in the beginning. 3 Through him all things were made; without him nothing was made that has been made. 4 In him was life, and that life was the light of all mankind. 5 The light shines in the darkness, and the darkness has not overcome[a] it.</description>
-    </item>
     
     <item>
       <title>Test 1</title>
