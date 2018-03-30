@@ -1,101 +1,45 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/liawagner.github.io/blog/test-1/</loc>
-    <lastmod>2018-03-30T16:51:22+00:00</lastmod>
+    <loc>https://liawagner.github.io/posts/test-2/</loc>
+    <lastmod>2018-03-30T08:53:49+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/globe-misleading-new-fiber-subscribers-about-data-cap/</loc>
-    <lastmod>2017-09-12T16:11:27+00:00</lastmod>
+    <loc>https://liawagner.github.io/posts/test-1/</loc>
+    <lastmod>2018-03-30T08:48:13+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/greater-is-he/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>https://liawagner.github.io/posts/my-first-post/</loc>
+    <lastmod>2018-03-30T11:53:25+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/contact/</loc>
-    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+    <loc>https://liawagner.github.io/posts/2018-03-30-your-filename/</loc>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/creating-a-new-theme/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/about/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/blog/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/blog/hugoisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/blog/migrate-from-jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/</loc>
-    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+    <loc>https://liawagner.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/</loc>
-    <lastmod>2018-03-30T16:51:22+00:00</lastmod>
+    <loc>https://liawagner.github.io/</loc>
+    <lastmod>2018-03-30T08:53:49+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/</loc>
+    <loc>https://liawagner.github.io/posts/</loc>
+    <lastmod>2018-03-30T08:53:49+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/</loc>
-    <lastmod>2018-03-30T16:51:22+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/go/</loc>
-    <lastmod>2018-03-30T16:51:22+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/hugo/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/internet/</loc>
-    <lastmod>2017-09-12T16:11:27+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/liawagner.github.io/categories/life/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>https://liawagner.github.io/tags/</loc>
     <priority>0</priority>
   </url>
   
