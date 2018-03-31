@@ -1,41 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://liawagner.github.io/posts/test-1/</loc>
-    <lastmod>2018-03-30T08:48:13+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/posts/my-first-post/</loc>
-    <lastmod>2018-03-30T11:53:25+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/posts/2018-03-30-your-filename/</loc>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/categories/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/</loc>
-    <lastmod>2018-03-30T08:48:13+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/posts/</loc>
-    <lastmod>2018-03-30T08:48:13+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://liawagner.github.io/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>https://clean-oryx.cloudvent.net/2016/10/15/our-first-1000/</loc>
+<lastmod>2016-10-15T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://clean-oryx.cloudvent.net/2016/11/01/latest-milestone/</loc>
+<lastmod>2016-11-01T00:00:00+00:00</lastmod>
+</url>
+<url>
+<loc>https://clean-oryx.cloudvent.net/2016/11/05/5000/</loc>
+<lastmod>2016-11-05T00:00:00+00:00</lastmod>
+</url>
 </urlset>
