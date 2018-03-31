@@ -10,7 +10,7 @@
     <atom:link href="/liawagner.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>Test 1</title>
+      <title>Test 2</title>
       <link>/liawagner.github.io/blog/test-1/</link>
       <pubDate>Fri, 30 Mar 2018 16:51:22 +0000</pubDate>
       
@@ -20,6 +20,8 @@
 &lt;h1 id=&#34;some-heading&#34;&gt;Some heading&lt;/h1&gt;
 
 &lt;p&gt;some text&lt;/p&gt;
+
+&lt;h3 id=&#34;more&#34;&gt;More&lt;/h3&gt;
 </description>
     </item>
     
