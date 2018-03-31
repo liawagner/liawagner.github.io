@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Int on Hugo Skeleton Theme Site</title>
+    <link>http://geeky.lightinasia.org/tags/int/index.xml</link>
+    <description>Recent content in Int on Hugo Skeleton Theme Site</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-ie</language>
+    <atom:link href="http://geeky.lightinasia.org/tags/int/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A page</title>
+      <link>http://geeky.lightinasia.org/a-page/</link>
+      <pubDate>Sat, 04 Feb 2017 19:25:17 +0800</pubDate>
+      
+      <guid>http://geeky.lightinasia.org/a-page/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Lorem ipsum dolor&lt;/strong&gt; sit amet, consectetur adipiscing elit. Aliquam tristique vulputate leo, in molestie lorem luctus vitae. In ut odio faucibus, ultricies erat quis, efficitur tortor. Etiam justo velit, interdum in orci suscipit, varius venenatis mauris. In congue aliquam eros. Suspendisse potenti. Donec fermentum sagittis odio nec pharetra. Etiam quis vulputate elit, in venenatis massa. Proin lacinia porta ante, ut laoreet nulla facilisis placerat. Mauris nec ex blandit massa iaculis euismod ac eget purus.&lt;/p&gt;
+
+&lt;p&gt;In sollicitudin, ante eget feugiat hendrerit, lacus eros auctor ligula, eget ultrices sapien libero sed quam. Sed nunc ante, vehicula sit amet placerat vitae, congue interdum purus. Quisque tellus ipsum, malesuada non rhoncus at, dignissim in dolor. Maecenas dui enim, ornare eu massa vel, viverra scelerisque urna. Praesent diam lacus, ullamcorper ut porttitor vel, ultrices ac erat. Vivamus id hendrerit diam, sed sagittis ipsum. Curabitur elementum lectus leo, at ultrices urna blandit non.&lt;/p&gt;
+
+&lt;p&gt;Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean commodo lectus id commodo condimentum. Donec at lectus at lorem viverra gravida eu quis sem. Aenean turpis elit, porttitor in blandit mattis, pulvinar id diam. Etiam vel ullamcorper ex. Vestibulum sit amet scelerisque tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla lectus augue, scelerisque sed quam nec, suscipit sagittis libero. Nunc lacus lectus, consequat ut lacus vel, euismod venenatis erat. Fusce quis lorem venenatis, lobortis quam sed, lacinia enim. Aenean maximus rutrum nisi, in consectetur lacus cursus porta. Vivamus vel sodales purus. Aenean accumsan aliquet laoreet. Fusce vulputate pretium est vitae mattis. Integer gravida gravida neque, vitae elementum elit consectetur a. Cras imperdiet lorem in turpis efficitur, lobortis feugiat nulla accumsan.&lt;/p&gt;
+
+&lt;p&gt;Proin tempor interdum nibh ut eleifend. Fusce hendrerit lacus libero, ac rhoncus libero scelerisque at. Sed blandit purus a orci mollis fermentum. Quisque auctor tempus placerat. Integer vitae interdum enim. Suspendisse tincidunt magna a est congue congue. Integer nibh orci, mattis ac nisl a, commodo porttitor augue. Proin augue velit, euismod a fringilla id, rhoncus sit amet nisl. Suspendisse eleifend ipsum augue, et accumsan ex bibendum sed.&lt;/p&gt;
+
+&lt;p&gt;Fusce rhoncus mollis eros, vitae vehicula nisi fringilla ut. Pellentesque purus tortor, pharetra et tristique ut, pulvinar sed augue. Quisque a est nec felis dictum lobortis vel sit amet elit. Mauris rhoncus eros eros, at imperdiet odio bibendum sit amet. Donec vitae purus nec nibh convallis dignissim eu sed nunc. Duis venenatis mi a blandit sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. In non enim eu odio mollis maximus. Suspendisse sit amet ex massa. Integer sed dignissim arcu.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

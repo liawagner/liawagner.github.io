@@ -2,84 +2,135 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>/liawagner.github.io/blog/greater-is-he/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/blog/hello/</loc>
+    <lastmod>2018-03-29T04:00:34+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/contact/</loc>
-    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/blog/faith-hope-love-these-three/</loc>
+    <lastmod>2017-02-07T15:11:19+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/creating-a-new-theme/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/power/</loc>
+    <lastmod>2017-02-04T23:16:49+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/about/</loc>
-    <lastmod>2014-04-09T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/a-page/</loc>
+    <lastmod>2017-02-04T19:25:17+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/goisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/blog/its-all-new/</loc>
+    <lastmod>2017-02-04T19:18:41+08:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/hugoisforlovers/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/about/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/migrate-from-jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/</loc>
-    <lastmod>2017-02-10T01:12:23+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/blog/2015-10-17-testpage3/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/blog/2015-10-16-testpage2/</loc>
+    <lastmod>2015-10-16T18:02:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/blog/2015-10-15-testpage/</loc>
+    <lastmod>2015-10-15T18:00:08+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/</loc>
+    <lastmod>2018-03-29T04:00:34+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/blog/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/tags/bible/</loc>
+    <lastmod>2017-02-07T15:11:19+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/</loc>
+    <loc>http://geeky.lightinasia.org/blog/</loc>
+    <lastmod>2018-03-29T04:00:34+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/tags/drivel/</loc>
+    <lastmod>2015-10-16T18:02:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/go/</loc>
-    <lastmod>2014-04-02T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/tags/exaggeration/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/hugo/</loc>
-    <lastmod>2014-09-28T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/</loc>
+    <lastmod>2018-03-29T04:00:34+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/jekyll/</loc>
-    <lastmod>2014-03-10T00:00:00+00:00</lastmod>
+    <loc>http://geeky.lightinasia.org/tags/hyperbole/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/liawagner.github.io/categories/life/</loc>
-    <lastmod>2017-02-10T11:53:04+08:00</lastmod>
+    <loc>http://geeky.lightinasia.org/tags/int/</loc>
+    <lastmod>2017-02-04T19:25:17+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/nonsense/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/power/</loc>
+    <lastmod>2017-02-04T23:16:49+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/rubbish/</loc>
+    <lastmod>2015-10-16T18:02:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/understatement/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://geeky.lightinasia.org/tags/waffle/</loc>
+    <lastmod>2015-10-17T18:03:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
