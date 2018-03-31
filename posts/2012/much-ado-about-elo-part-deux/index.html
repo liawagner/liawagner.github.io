@@ -1,0 +1,107 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Thoughts and Geekery by Ant Zucaro</title>
+    <link rel="stylesheet" href="/static/css/blog.min.css" />
+
+  </head>
+
+  <body>
+    <div class="container">
+  <div class="row">
+    <div class="two columns">&nbsp;</div>
+    <div class="eight columns top-nav">
+      <ul class="nav">
+        <li><a class="logo" href="/">Ant Zucaro</a></li>
+        <li><a href="/categories/photography">photography</a></li>
+        <li><a href="/posts">archive</a></li>
+        <li><a href="/about">about me</a></li>
+        <li><a href="/index.xml">rss</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="two columns">&nbsp;</div>
+      <div class="eight columns">
+        <h2>Much Ado About Elo - Part Deux</h2>
+        <p class="post-date">August 6, 2012</p>
+
+        
+
+<p>It has been about two weeks since I talked initially about our Elo ranking system. How time flies! As that time has passed, I&rsquo;ve collected lots of valuable feedback both from players as well as my fellow developers, and I&rsquo;m very excited to tell you about some further tweaks I&rsquo;ve made to the algorithm. There are two relatively big changes: one dealing with non-duel game modes, and another dealing with how S is calculated in the original formula. I&rsquo;ll talk about the ranking changes to the various game modes first.</p>
+
+<h3 id="duels-versus-everything-else">Duels Versus&hellip;Everything Else</h3>
+
+<p>Let me start by saying duel is largely unaffected. Phew! It is naturally the most competitive game mode, thus it deserves a more pure, winner-take-all algorithm. It&rsquo;s a good match for the implementation I discussed in my last post.</p>
+
+<p>Team games are a different animal, however. With team games we see win-switchers (switching right before the end to be on the winning team), stackers (loading up the talent on one team only), and quitters. While we really can&rsquo;t do anything about the latter, we can do something about the former two. The change I made to counterat those is to rank-compare every player in the game to everyone else regardless of team. The points gained or lost against each opponent are then summed to formulate the final net gain/loss. This means that you have to hold your own against everyone else to gain points instead of relying on just being on the winning team. Imagine that! This also means that you can still lose points when you win if you don&rsquo;t score equal to or higher than expected.</p>
+
+<h3 id="the-scorefactor">The Scorefactor</h3>
+
+<p>Wait, did you say score? Yes, I said score. In order to make individual comparisons work, I had to use the individual&rsquo;s score as a means of comparison in lieu of just win or loss (1 or 0 for the S value). Each player&rsquo;s score is first converted into score per second, which takes his or her alivetime in the game into account. The scores for two players A and B are then compared with the following formula to obtain the scorefactor, S:</p>
+
+<p><img src="/uploads/2012/08/scorefactor.png"></p>
+
+<p>This formula yields a value between 0 and 1, which tells us the “winner” in the comparison. A value less than 0.5 means player A won, a value greater than 0.5 mean player B won, and a value of exactly 0.5 represents a draw. Note that the sum total of A and B&rsquo;s scorefactor here is 1, so B&rsquo;s scorefactor is simply 1-Sa.</p>
+
+<p>The resulting S value is plugged into the original formula I covered in my initial post, which is then used to calculate the final points gained or lost. For the sake of completeness, I&rsquo;ll relist it here:</p>
+
+<p><img src="/uploads/2012/08/elodelta.png"></p>
+
+<p>The big change here is that S can now take on a range of values between 0 and 1. It&rsquo;s that range that allows players to get an accurate points value for their contribution to the game, no matter the team they&rsquo;re on. It&rsquo;s a big improvement over the black and white algorithm that we had before.</p>
+
+<h3 id="in-conclusion">In Conclusion</h3>
+
+<p>So what we have now for non-duel games is something that scales the points gained or lost according to how well you score versus everyone else in the game. For duel games, the initial algorithm remains in place. The end result is a ranking system that I think everyone can find fair, albeit imperfect. That being said, I suggest that you take all of the ranks and scores with a grain of salt: there is no number that is a true indicator of what you bring to the table as a player. Get in the game and focus on what is truly important: having fun! Happy fragging, and I&rsquo;ll see you out there!</p>
+
+
+        <section id="prev">
+          Previous post: <a class="previous" href="https://chriswayg.github.io/posts/2013/a-visit-to-oklahoma/"><i class="icon-arrow-left"></i> A visit to Oklahoma</a><br>
+        </section>
+
+        <section id="next">
+          Next post: <a class="next" href="https://chriswayg.github.io/posts/2012/much-ado-about-elo/">Much Ado About Elo <i class="icon-arrow-right"></i></a>
+        </section>
+      </div>
+      <div class="two columns">&nbsp;</div>
+    </div>
+  </div>
+
+    
+    <div id="footer">
+      <div class="row" >
+        <div class="twelve columns">
+          <p>&copy; Ant Zucaro 2009-2016. &nbsp; Powered by <a href="http://hugo.spf13.com" title="The Hugo static site generator">Hugo</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/vendor/jquery.js"></script>
+<script src="/static/js/vendor/jquery.unveil.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("img").unveil();
+  });
+</script>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1465952-2']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+  </body>
+</html>
+

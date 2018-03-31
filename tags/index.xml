@@ -1,14 +1,201 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on My New Hugo Site</title>
-    <link>https://liawagner.github.io/tags/</link>
-    <description>Recent content in Tags on My New Hugo Site</description>
-    <generator>Hugo -- gohugo.io</generator>
+      <title>Tags on  </title>
+    <link>https://chriswayg.github.io/tags/</link>
     <language>en-us</language>
+    <author>Ant Zucaro</author>
+    <rights>Copyright (c) 2009 - 2014, Ant Zucaro; all rights reserved.</rights>
+    <updated>2014-03-23 18:22:00 -0500 -0500</updated>
     
-	<atom:link href="https://liawagner.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Appalachian Trail</title>
+      <link>https://chriswayg.github.io/tags/appalachian-trail/</link>
+      <pubDate>Sun, 23 Mar 2014 18:22:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/appalachian-trail/</guid>
+      <description></description>
+    </item>
     
+    <item>
+      <title>Barn</title>
+      <link>https://chriswayg.github.io/tags/barn/</link>
+      <pubDate>Mon, 03 Feb 2014 19:58:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/barn/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Black and White</title>
+      <link>https://chriswayg.github.io/tags/black-and-white/</link>
+      <pubDate>Sat, 01 Mar 2014 18:12:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/black-and-white/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Harpers Ferry</title>
+      <link>https://chriswayg.github.io/tags/harpers-ferry/</link>
+      <pubDate>Sun, 23 Mar 2014 18:22:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/harpers-ferry/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hike</title>
+      <link>https://chriswayg.github.io/tags/hike/</link>
+      <pubDate>Sun, 01 Jun 2014 20:30:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/hike/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Historic</title>
+      <link>https://chriswayg.github.io/tags/historic/</link>
+      <pubDate>Mon, 12 May 2014 20:30:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/historic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>House</title>
+      <link>https://chriswayg.github.io/tags/house/</link>
+      <pubDate>Mon, 03 Feb 2014 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/house/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Marsh</title>
+      <link>https://chriswayg.github.io/tags/marsh/</link>
+      <pubDate>Sat, 08 Feb 2014 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/marsh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Middleburg</title>
+      <link>https://chriswayg.github.io/tags/middleburg/</link>
+      <pubDate>Sat, 01 Mar 2014 18:12:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/middleburg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Movies</title>
+      <link>https://chriswayg.github.io/tags/movies/</link>
+      <pubDate>Sat, 01 Feb 2014 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/movies/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mtvernon</title>
+      <link>https://chriswayg.github.io/tags/mtvernon/</link>
+      <pubDate>Mon, 12 May 2014 20:30:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/mtvernon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Panorama</title>
+      <link>https://chriswayg.github.io/tags/panorama/</link>
+      <pubDate>Mon, 12 May 2014 20:30:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/panorama/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plane</title>
+      <link>https://chriswayg.github.io/tags/plane/</link>
+      <pubDate>Sun, 09 Feb 2014 17:57:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/plane/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://chriswayg.github.io/tags/python/</link>
+      <pubDate>Fri, 16 May 2014 09:55:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Raleigh</title>
+      <link>https://chriswayg.github.io/tags/raleigh/</link>
+      <pubDate>Mon, 03 Feb 2014 19:58:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/raleigh/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Smithsonian</title>
+      <link>https://chriswayg.github.io/tags/smithsonian/</link>
+      <pubDate>Sun, 09 Feb 2014 17:57:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/smithsonian/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Spider Web</title>
+      <link>https://chriswayg.github.io/tags/spider-web/</link>
+      <pubDate>Sat, 08 Feb 2014 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/spider-web/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Unicode</title>
+      <link>https://chriswayg.github.io/tags/unicode/</link>
+      <pubDate>Fri, 16 May 2014 09:55:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/unicode/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vacation</title>
+      <link>https://chriswayg.github.io/tags/vacation/</link>
+      <pubDate>Mon, 25 Aug 2014 20:53:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/vacation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xonotic</title>
+      <link>https://chriswayg.github.io/tags/xonotic/</link>
+      <pubDate>Wed, 25 Jun 2014 21:20:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/xonotic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Xonstat</title>
+      <link>https://chriswayg.github.io/tags/xonstat/</link>
+      <pubDate>Fri, 16 May 2014 09:55:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/tags/xonstat/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

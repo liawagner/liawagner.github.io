@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Xonotic on  </title>
+    <link>https://chriswayg.github.io/categories/xonotic/</link>
+    <language>en-us</language>
+    <author>Ant Zucaro</author>
+    <rights>Copyright (c) 2009 - 2014, Ant Zucaro; all rights reserved.</rights>
+    <updated>2012-08-06 00:00:00 &#43;0000 UTC</updated>
+    
+    <item>
+      <title>Much Ado About Elo - Part Deux</title>
+      <link>https://chriswayg.github.io/posts/2012/much-ado-about-elo-part-deux/</link>
+      <pubDate>Mon, 06 Aug 2012 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2012/much-ado-about-elo-part-deux/</guid>
+      <description>
+
+&lt;p&gt;It has been about two weeks since I talked initially about our Elo ranking system. How time flies! As that time has passed, I&amp;rsquo;ve collected lots of valuable feedback both from players as well as my fellow developers, and I&amp;rsquo;m very excited to tell you about some further tweaks I&amp;rsquo;ve made to the algorithm. There are two relatively big changes: one dealing with non-duel game modes, and another dealing with how S is calculated in the original formula. I&amp;rsquo;ll talk about the ranking changes to the various game modes first.&lt;/p&gt;
+
+&lt;h3 id=&#34;duels-versus-everything-else&#34;&gt;Duels Versus&amp;hellip;Everything Else&lt;/h3&gt;
+
+&lt;p&gt;Let me start by saying duel is largely unaffected. Phew! It is naturally the most competitive game mode, thus it deserves a more pure, winner-take-all algorithm. It&amp;rsquo;s a good match for the implementation I discussed in my last post.&lt;/p&gt;
+
+&lt;p&gt;Team games are a different animal, however. With team games we see win-switchers (switching right before the end to be on the winning team), stackers (loading up the talent on one team only), and quitters. While we really can&amp;rsquo;t do anything about the latter, we can do something about the former two. The change I made to counterat those is to rank-compare every player in the game to everyone else regardless of team. The points gained or lost against each opponent are then summed to formulate the final net gain/loss. This means that you have to hold your own against everyone else to gain points instead of relying on just being on the winning team. Imagine that! This also means that you can still lose points when you win if you don&amp;rsquo;t score equal to or higher than expected.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-scorefactor&#34;&gt;The Scorefactor&lt;/h3&gt;
+
+&lt;p&gt;Wait, did you say score? Yes, I said score. In order to make individual comparisons work, I had to use the individual&amp;rsquo;s score as a means of comparison in lieu of just win or loss (1 or 0 for the S value). Each player&amp;rsquo;s score is first converted into score per second, which takes his or her alivetime in the game into account. The scores for two players A and B are then compared with the following formula to obtain the scorefactor, S:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://chriswayg.github.io/uploads/2012/08/scorefactor.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;This formula yields a value between 0 and 1, which tells us the “winner” in the comparison. A value less than 0.5 means player A won, a value greater than 0.5 mean player B won, and a value of exactly 0.5 represents a draw. Note that the sum total of A and B&amp;rsquo;s scorefactor here is 1, so B&amp;rsquo;s scorefactor is simply 1-Sa.&lt;/p&gt;
+
+&lt;p&gt;The resulting S value is plugged into the original formula I covered in my initial post, which is then used to calculate the final points gained or lost. For the sake of completeness, I&amp;rsquo;ll relist it here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://chriswayg.github.io/uploads/2012/08/elodelta.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;The big change here is that S can now take on a range of values between 0 and 1. It&amp;rsquo;s that range that allows players to get an accurate points value for their contribution to the game, no matter the team they&amp;rsquo;re on. It&amp;rsquo;s a big improvement over the black and white algorithm that we had before.&lt;/p&gt;
+
+&lt;h3 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h3&gt;
+
+&lt;p&gt;So what we have now for non-duel games is something that scales the points gained or lost according to how well you score versus everyone else in the game. For duel games, the initial algorithm remains in place. The end result is a ranking system that I think everyone can find fair, albeit imperfect. That being said, I suggest that you take all of the ranks and scores with a grain of salt: there is no number that is a true indicator of what you bring to the table as a player. Get in the game and focus on what is truly important: having fun! Happy fragging, and I&amp;rsquo;ll see you out there!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Much Ado About Elo</title>
+      <link>https://chriswayg.github.io/posts/2012/much-ado-about-elo/</link>
+      <pubDate>Wed, 25 Jul 2012 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2012/much-ado-about-elo/</guid>
+      <description>
+
+&lt;p&gt;I’ve had several players ask me about how the ranking system for XonStat works. This is my humble attempt to do so. If you have any particular questions that aren’t answered here, ping me in the Xonotic IRC or forums and I’ll try to answer it. If the wind is blowing in a favorable direction, I might also update this very post.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-short-story&#34;&gt;The Short Story&lt;/h3&gt;
+
+&lt;p&gt;Did I mention that there is a short story and a long story to this? There is - how delightful!The short story is that I’m using the Elo rating system to gauge the strength of players in Xonotic. It’s similar, though not exactly the same, as what is used in many chess ranking systems. An excellent writeup of the history and mathematical details behind the Elo algorithm can be found on &lt;a href=&#34;http://en.wikipedia.org/wiki/Elo_rating_system&#34;&gt;Wikipedia&lt;/a&gt;. For those who want all the gory details, read that and become enlightened! Or read it and become more confused. It’s okay either way. Now for the long story.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-long-story&#34;&gt;The Long Story&lt;/h3&gt;
+
+&lt;p&gt;Way back when I was first implementing XonStat, people would often approach me with an idea to incorporate global rankings into the system. I had no idea of how to do so until someone pointed out the aforementioned Elo system to me, also noting that several other popular FPS games had also done so. I looked into it and how it works. divVerent and I set out to implement it within our database.&lt;/p&gt;
+
+&lt;p&gt;The Elo system is based on wins and losses versus your opponents. You gain points from winning, and you lose points from losing. Sounds simple, right? It really is, but adopting the algorithm to Xonotic had a few nuances. The rating of your opponent also comes into play such that wins over stronger opponents will give you more points than wins over weak ones. This means that a win over a person rated higher than you yields more Elo points than a win over a person new to the game. The same principles apply to losses.&lt;/p&gt;
+
+&lt;p&gt;Let’s cut right to the chase and talk about how XonStat determines the points increase or decrease for each match. Unfortunately for this part we’ll have to look at the gory mathematical details. We’ll use a theoretical match between players A and B, and we’ll look specifically at the points increase/decrease for player A (forgive me for the bad screen caps):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://chriswayg.github.io/uploads/2012/07/elo/elo.png&#34;&gt;&lt;/p&gt;
+
+&lt;p&gt;In the notation above E is the expected outcome, S is the actual outcome (1 for a win, 0 for a loss), and K is the experience adjustment factor. We’ll talk more about K in a minute, but for now just think of it as a constant.&lt;/p&gt;
+
+&lt;p&gt;To get the points increase (or decrease) value for each match, we first have to start with what the expected outcome would be. Simply put, stronger players are more likely to defeat weaker players, and the formula for E is just expressing that in terms of a likelihood between 0 and 1. This may help you understand why winning against very weak opponents nets you very little points - if the expected outcome is near 1 (a sure win), it follows that what’s left over after subtracting it from 1 will not be very much, thus the amount of points gained will be low.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-experience-factor&#34;&gt;The Experience Factor&lt;/h3&gt;
+
+&lt;p&gt;The more games you have under your belt, the more accurate we can say your Elo score is, and thus the less we need to adjust your score after each game. This is exactly what the K is for in the formulas above. We vary K along with how many games you’ve played. You start off with a K value of 200, but over the course of 32 games that factor decreases linearly down to 40. This means that new player will jump up and down in point value much more dramatically than a seasoned veteran until he or she reaches the requisite number of games.&lt;/p&gt;
+
+&lt;p&gt;In XonStat we also use the K value to account for players who have not played an entire match. Such players have their K value modified downwards by the percentage of the match they did not play. This is determined by comparing their alivetime value with the match’s overall duration. For example, if a player plays 800 seconds out of a 1000-second match, their K value will be 80% of what it would have been otherwise.&lt;/p&gt;
+
+&lt;h3 id=&#34;a-real-example&#34;&gt;A Real Example&lt;/h3&gt;
+
+&lt;p&gt;Enough with this A and B business. Let’s do an example with real values! Imagine I (Elo 350) play Mirio (Elo 450) in a duel and Mirio wins. Assuming both of us are experienced players with over 32 games played, we’ll each have a K value of 20. Since Mirio won, his S value is 1 while mine is 0.&lt;/p&gt;
+
+&lt;p&gt;Mirio’s points value from his win will be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;40*(1- 13.33/(13.33+7.50)) = 14.40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My points from the loss will be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;40*(0- 7.50/(7.50+13.33)) = -14.40
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let’s turn the tables and see the points values for if I win the match! This time Mirio’s S value will be 0 and mine will be 1.&lt;/p&gt;
+
+&lt;p&gt;Mirio’s points from his loss will be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;40*(0- 13.33/(13.33+7.50)) = -25.60
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My points from the win will be:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;40*(1- 7.50/(7.50+13.33)) = 25.60
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Take note of the points differences when the winners are transposed. If I won the match, I was rewarded with more points because I was expected to lose. Hooray to the underdog!&lt;/p&gt;
+
+&lt;h3 id=&#34;team-matches&#34;&gt;Team Matches&lt;/h3&gt;
+
+&lt;p&gt;Thus far we’ve only discussed matches between two players. That’s fine and well, but what about team matches where there is more than one person to compare against? I handle this by running the above calculations between each winner and loser and averaging the result. For example, if a player has won a game against three individuals, the points he gets is the sum of all of the points from each individual calculation divided by three. The points gained is thus the average points gained from each individual a player has defeated, with the opposite being true for lost points.&lt;/p&gt;
+
+&lt;h3 id=&#34;rankings&#34;&gt;Rankings&lt;/h3&gt;
+
+&lt;p&gt;As you may have guessed by now, we use the aggregated Elo scores of players to determine rank. Ranks are calculated at the beginning of each day using the Elo values at that time. Ranks are per game type, and mutators are not taken into account. You can check out the current ranks on the “leaderboard” page of stats each day.&lt;/p&gt;
+
+&lt;h3 id=&#34;in-conclusion&#34;&gt;In Conclusion&lt;/h3&gt;
+
+&lt;p&gt;In this post I’ve covered the details of the Elo implementation within XonStat, the statistics database for Xonotic. I’ve covered individual and team games as well as how the basic structure of Elo is used to determine point gains and losses from matches. I also discussed a little about how experience alters the ratings and how ranking works. I hope you’ve found this subject matter entertaining! As always, you can contact me in the forums at forums.xonotic.org or on IRC at #xonotic on Quakenet (I’m Antibody or dfdashh) with any questions or comments.&lt;/p&gt;
+
+&lt;p&gt;&lt;i&gt;Note: this entry was cross-posted to the Xonotic blog as well&lt;/i&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Duel Commentary - mudkip vs. Galtath</title>
+      <link>https://chriswayg.github.io/posts/2012/duel-commentary-mudkip-vs.-galtath/</link>
+      <pubDate>Wed, 11 Jul 2012 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2012/duel-commentary-mudkip-vs.-galtath/</guid>
+      <description>&lt;p&gt;Over the past few months I&amp;rsquo;ve been playing Xonotic less and less but
+developing more and more. This has started to change a little bit with the arrival of some consistent North American players. Where there once was just srkdy, nifrek, and myself, I am now seeing more activity on the servers at night, particularly around 9-10PM. Galtath and mudkip are two examples of such players, and I&amp;rsquo;ve been fortunate enough to spectate them multiple times. On one particular night they had a great back-and-forth match on bloodrun that I subsequently commentated. Enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34;
+src=&#34;http://www.youtube.com/embed/V2NC9j_2F6c&#34; frameborder=&#34;0&#34;
+allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: ProjektGhost&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-projektghost/</link>
+      <pubDate>Fri, 03 Dec 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-projektghost/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s my latest player interview. It&amp;rsquo;s with a teammate of mine: ProjektGhost! We talk about several things including the Nexuiz/Xonotic community, his clan history, and some of the players that have influenced him. Enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/wRMRNS_BsQE&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p style=&#34;text-align: left;&#34;&gt;The match to go along with the audio is between MiT (clanmit.com) and f10, plus some random other people from HOCTF on the f10 side. The map is runningmanctf.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Xonotic Movement Tutorial</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-movement-tutorial/</link>
+      <pubDate>Mon, 29 Nov 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-movement-tutorial/</guid>
+      <description>&lt;p style=&#34;text-align: left;&#34;&gt;I recently participated in the making of the Xonotic Movement Tutorial - I provided the voice acting for the English version. In this tutorial video (shown below) both new and old players can learn tips and tricks on moving around in the new version of the game.&lt;/p&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;Being that the physics have changed considerably, many thought the &#34;depth&#34; to movement disappeared; that the movement in the game was too easy. This is simply not true! There is still much to learn, and this video will get you well on your way:&lt;/p&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;Many thanks to SINSniper (coordination), FruitieX (video editing/demo), chooksta (music), and fabzor (script) for their help in this production.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: FruitieX&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-fruitiex/</link>
+      <pubDate>Sat, 13 Nov 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-fruitiex/</guid>
+      <description>&lt;p&gt;Here is my latest interview with FruitieX from Finland. We talk about his contributions to the project and some of his other interests outside of the game. What&amp;rsquo;s cool about this one is it is the first one using actual Xonotic gameplay from a development (alpha) version of the project as of &lt;sup&gt;11&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;. It also features a retextured map (aggressor) that is in the works for the new game as well!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/C3x6yE9kupM&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: divVerent&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-divverent/</link>
+      <pubDate>Tue, 09 Nov 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-divverent/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m happy to bring you another player interview! This time I&amp;rsquo;m talking with one of the core developers of Xonotic, divVerent. We talk about some of the awesome pieces of functionality he&amp;rsquo;s worked on thus far, the importance of attitude and diversity in the community, and of course how he got involved in the game in the first place.&lt;/p&gt;
+
+&lt;p&gt;We talked for such a while that it had to be broken up into two parts! In each part the background video is from a small CTF game on Facing Worlds:&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/0hnJDagPZyE&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/56bn8q2xJAo?list=PL2E21F511C4D21C43&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic player interview: Edong23&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-edong23/</link>
+      <pubDate>Sat, 30 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-edong23/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s another Xonotic player interview for your viewing pleasure! This one is with a regular on the HOCTF scene: Edong23. We talk about his affection for the laser, the servers he operates, and his views on the upcoming Xonotic release. What I really appreciate in this interview (among the others I&amp;rsquo;ve done) is his candor. I really like the honesty I&amp;rsquo;m seeing in this community, because so much depends on transparency! I hope you enjoy.&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/AgMm9raM70c&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic player interview: kojn&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-kojn/</link>
+      <pubDate>Fri, 29 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-kojn/</guid>
+      <description>&lt;p&gt;Here is my latest interview. It is with an advanced dueler from Great Britain: kojn. Enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/l-U24-U7wDk&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: Mirio&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-mirio/</link>
+      <pubDate>Tue, 26 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-mirio/</guid>
+      <description>&lt;p&gt;Hi folks! Here I am again with another player interview. This time I&amp;rsquo;m talking with Mirio, a German player and a member of the BOT team. I hope you enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/41ZMPS4eQ_g&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: chooksta&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-chooksta/</link>
+      <pubDate>Sat, 23 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-chooksta/</guid>
+      <description>&lt;p&gt;I am happy to announce the first (of many, hopefully) player interviews, where you can hear players respond to my questions while you watch a sample of their actual gameplay. In this one I talk with chooksta, who is known to all of us in the Xonotic community as both a nice guy and a talented musician. We talk about how he first came to play the game, his music, and what he&amp;rsquo;s looking forward to in Xonotic. The gameplay sample is from a game on &amp;ldquo;mentalrespace&amp;rdquo; on an Australian server. I hope you all enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/XQ8qOVoyHfY&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

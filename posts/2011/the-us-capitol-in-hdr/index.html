@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Random Thoughts and Geekery by Ant Zucaro</title>
+    <link rel="stylesheet" href="/static/css/blog.min.css" />
+
+  </head>
+
+  <body>
+    <div class="container">
+  <div class="row">
+    <div class="two columns">&nbsp;</div>
+    <div class="eight columns top-nav">
+      <ul class="nav">
+        <li><a class="logo" href="/">Ant Zucaro</a></li>
+        <li><a href="/categories/photography">photography</a></li>
+        <li><a href="/posts">archive</a></li>
+        <li><a href="/about">about me</a></li>
+        <li><a href="/index.xml">rss</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class="two columns">&nbsp;</div>
+      <div class="eight columns">
+        <h2>The US Capitol in HDR</h2>
+        <p class="post-date">August 7, 2011</p>
+
+        <p>This is the US Capitol as seen in HDR. I&rsquo;ve posted this pic before, but that was just the raw image. Tonight I thought I&rsquo;d take a break from the San Francisco pics and post something out of the ordinary. I&rsquo;ve been following Trey Ratcliff&rsquo;s stuff, and that gave me the idea to try the HDR concept. More than just that, I threw in some panoramic stuff in for fun.</p>
+
+<div class='wp-caption aligncenter' style='width: 660px; margin-left: auto; margin-right: auto;'>
+<img width='650px' height='323px' alt="The US Capitol, seen in HDR" title='The US Capitol, seen in HDR' src='/uploads/2011/08/USCHDR/capitol_hdr_m.jpg'>
+<p class='wp-caption-text'>The US Capitol, seen in HDR <a href='/uploads/2011/08/USCHDR/capitol_hdr_l.jpg'><img alt='See this image in full size' src='/static/fs_img.jpg' /></a></p>
+</div>
+
+<p>So here&rsquo;s the genesis of this, if you&rsquo;re interested. I started with a set of 8 Nikon NEFs (that&rsquo;s their RAW format) which I corrected with ufraw. I then stitched those images together with hugin, which gave me a full sized, normally-exposed panorama. Having noted the original exposure value in ufraw and also having saved the hugin project, I then went back and adjusted the exposure on the original 8 raw images, saving them under their original names (overwriting). I did this twice; the first time I adjusted the exposures down one exposure value (to -1 EV), and the second time up one (to +1 EV). Each time I did this I ran the panorama through hugin again using the saved project file, which gave me the same exact orientation, but with differently exposed photos each time.</p>
+
+<p>In the end I had three panoramas of differing exposure values. This was a suitable set to feed into qtpfsgui, which I did using the &ldquo;Fattal&rdquo; flavor of algorithm to produce the result above. A good bit of work, but voila!</p>
+
+
+        <section id="prev">
+          Previous post: <a class="previous" href="https://chriswayg.github.io/posts/2011/algonkian-park/"><i class="icon-arrow-left"></i> Algonkian Park</a><br>
+        </section>
+
+        <section id="next">
+          Next post: <a class="next" href="https://chriswayg.github.io/posts/2011/san-francisco-day-4---point-reyes-national-seashore/">San Francisco Day 4 - Point Reyes National Seashore <i class="icon-arrow-right"></i></a>
+        </section>
+      </div>
+      <div class="two columns">&nbsp;</div>
+    </div>
+  </div>
+
+    
+    <div id="footer">
+      <div class="row" >
+        <div class="twelve columns">
+          <p>&copy; Ant Zucaro 2009-2016. &nbsp; Powered by <a href="http://hugo.spf13.com" title="The Hugo static site generator">Hugo</a>.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/vendor/jquery.js"></script>
+<script src="/static/js/vendor/jquery.unveil.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("img").unveil();
+  });
+</script>
+
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-1465952-2']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+</script>
+
+  </body>
+</html>
+

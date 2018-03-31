@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Geekery on  </title>
+    <link>https://chriswayg.github.io/categories/geekery/</link>
+    <language>en-us</language>
+    <author>Ant Zucaro</author>
+    <rights>Copyright (c) 2009 - 2014, Ant Zucaro; all rights reserved.</rights>
+    <updated>2014-11-24 21:50:00 -0500 -0500</updated>
+    
+    <item>
+      <title>Retropie Setup</title>
+      <link>https://chriswayg.github.io/posts/2014/retropie/</link>
+      <pubDate>Mon, 24 Nov 2014 21:50:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2014/retropie/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve been fiddling a lot with &lt;a href=&#34;http://blog.petrockblock.com/retropie/&#34;&gt;RetroPie&lt;/a&gt; lately. It satisfies a lot of the nostalgic gaming urges I get from time to time. There&amp;rsquo;s just nothing like a bout of Super Metroid to cleanse the soul! With how much fun I was having with the system, I wanted to share the love.&lt;/p&gt;
+
+&lt;p&gt;I will admit that it wasn&amp;rsquo;t exactly a smooth process from end to end. I certainly had a lot of trials and tribulations along the way to the smooth system that I have today. When a friend of mine purchased a &lt;a href=&#34;http://www.amazon.com/CanaKit-Raspberry-Complete-Original-Preloaded/dp/B008XVAVAW&#34;&gt;CanaKit B+ kit&lt;/a&gt; from Amazon at my recommendation, I took it as an opportunity to document the process from end to end. I gave him my completely-functional SD card and I took his. What follows are the steps I took to get a working system. Here we go!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;First grab the latest &lt;a href=&#34;http://blog.petrockblock.com/download/retropie-project-image/&#34;&gt;RetroPie SD card image&lt;/a&gt; (v2.3 at the time of this writing). After reading a few forum posts, this seemed like the way to go. It&amp;rsquo;s an extremely quick way to get up and running. Start off by unzipping the raw image into a directory of your choice:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+unzip RetroPieImage_ver2.3.img.zip
+&lt;/code&gt;
+&lt;/pre&gt;
+    
+
+&lt;p&gt;Next, copy the image onto your SD card of choice with the dd command. My SD card was /dev/sde at the time, so plug in your device letter accordignly:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo dd if=RetroPieImage_ver2.3.img bs=2M of=/dev/sde
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Once the copy finishes, take out the SD card and boot up the Pi with your
+keyboard, mouse, and game controller connected. I have a &lt;a href=&#34;http://www.amazon.com/Logitech-Dual-Action-Game-Pad/dp/B0000ALFCI/ref=sr_1_1?ie=UTF8&amp;amp;qid=1416884420&amp;amp;sr=8-1&amp;amp;keywords=logitech+dual+action+gamepad&amp;amp;pebp=1416884433304&#34;&gt;Logitech Dual Action&lt;/a&gt; controller that works fine. Once you have everything all connected, plug in your power supply and wait for your system to boot. You&amp;rsquo;ll go right into emulationstation by default, but we still have some other stuff to do first. Press &amp;ldquo;F4&amp;rdquo; to exit out of emulationstation without setting it up.&lt;/p&gt;
+
+&lt;p&gt;Once you are back on the command prompt, further configure your Pi with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo raspi-config
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;This will bring up a textual configuration interface. Follow the prompts to expand your root filesystem (option #1) and change your default password (option #2). If you live in the US, you may also want to set your keyboard locale as well - by default, it ships with a en-GB locale. You can change this with option #4.&lt;/p&gt;
+
+&lt;p&gt;If you feel comfortable overclocking your Pi, now is the time to do it. The overclocking options are located under option #7. I chose to overclock mine to 950MHz, which is the &amp;ldquo;high&amp;rdquo; option. I&amp;rsquo;ve found this to give reasonable performance without completely maxing out the system.&lt;/p&gt;
+
+&lt;p&gt;After you are done configuring to your heart&amp;rsquo;s content with raspi-config, exit and reboot using the options provided. You&amp;rsquo;ll hit the emulationstation menu again. This time go through the steps to configure your game controller. It is nothing more than hitting the buttons it tells you to on the screen. Once done with that, make sure the interface is responsive to your newly-configured buttons. If something has gone awry, you can reconfigure by hitting the &amp;ldquo;start&amp;rdquo; button and choosing the &amp;ldquo;configure input&amp;rdquo; option.&lt;/p&gt;
+
+&lt;p&gt;Now that the frontend is all set, next up you&amp;rsquo;ll configure your controller for the emulators the frontend will use. The default RetroPie image ships with a ton of them, but thankfully they can all leverage one controller setup. You&amp;rsquo;ll have to run through each of the buttons on your controller again. Run the following to do just that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+cd /opt/retropie/emulators/RetroArch/installdir/bin/
+sudo retroarch-joyconfig -j 0 -o /opt/retropie/configs/all/retroarch.cfg
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Last but not least, alter the config file you just created to allow you to exit out of your gaming emulators without needing a keyboard. Do that with the following:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+sudo nano /opt/retropie/configs/all/retroarch.cfg
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;Add the following lines to establish a hotkey. This hotkey will let you exit emulators by pressing start+select. Note that the actual values may vary here. Be sure to use the code values for the keys you want! They can be found in the same file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+input_enable_hotkey_btn = &#34;8&#34;
+input_exit_emulator_btn = &#34;9&#34;
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;With these options set up, you can leave your keyboard and mouse at home.
+You&amp;rsquo;re now ready from retro-gaming action! Enjoy.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Capturing Your Favorite Xonotic Moments</title>
+      <link>https://chriswayg.github.io/posts/2014/capturing-your-favorite-xonotic-moments/</link>
+      <pubDate>Wed, 25 Jun 2014 21:20:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2014/capturing-your-favorite-xonotic-moments/</guid>
+      <description>&lt;p&gt;Over the past few days I&amp;rsquo;ve been experimenting with custom screenshot binds and demo recording to make capturing and sharing my favorite Xonotic moments as seamless as possible. The issue I am trying to solve is one you&amp;rsquo;ve likely encountered if you&amp;rsquo;ve been playing for a while: having figured out how to record snippets of your demos (&lt;code&gt;cl_capturevideo &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;0&lt;/sub&gt;&lt;/code&gt;), what&amp;rsquo;s the best way to keep track of when to hit the record button? Even more troubling, what video recording settings yield a good space and encoding time to quality balance? I believe I&amp;rsquo;ve found simple ways to achieve both of these things. Read on for the details.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-core-problem&#34;&gt;The Core Problem&lt;/h3&gt;
+
+&lt;p&gt;For the sake of this discussion, let&amp;rsquo;s assume the scenario is that I want to capture frags to make a &amp;ldquo;highlight reel&amp;rdquo; video that I could then share with my friends. The problem is that I have a bunch of demos sitting on my hard drive along with a hand-tabulated list of times in which my highlight-worthy frags happened. Pairing these two together is a highly manual (read: annoying) process - I have to bring up Xonotic and fast forward through the demos until the alotted time so I can capture only the pieces of interest and nothing else. While it is great to watch all of these demos and reminisce about the fun times I&amp;rsquo;ve had, I&amp;rsquo;d rather be back out on the servers &lt;em&gt;making&lt;/em&gt; more memories!&lt;/p&gt;
+
+&lt;h3 id=&#34;the-setup&#34;&gt;The Setup&lt;/h3&gt;
+
+&lt;p&gt;There are two things that can ease the process. The first involves tuning the default recording profile that comes with Xonotic. While the out-of-the-box settings are sufficient for viewing what you&amp;rsquo;ve done in game, they are far from the production quality that we want to put up on YouTube. What we want is something that saves us disk space, encodes quickly, but all the while looks superb. Fortunately a few simple cvar changes can make that happen. Enter the following in your config.cfg (in ~/.xonotic/data/ on Linux, $YOUR_USER/Saved Games/xonotic/data on Windows):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+cl_capturevideo_ogg 1
+cl_capturevideo_ogg_theora_quality 63
+cl_capturevideo_ogg_theora_bitrate -1
+cl_capturevideo_ogg_theora_keyframe_bitrate_multiplier 2
+cl_capturevideo_ogg_theora_keyframe_maxinterval 500
+cl_capturevideo_ogg_theora_keyframe_mininterval 1
+cl_capturevideo_ogg_theora_keyframe_auto_threshold 80
+cl_capturevideo_ogg_theora_noise_sensitivity 0
+cl_capturevideo_ogg_vorbis_quality 10
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;These changes essentially max out the builtin ogg-theora settings that ship with Xonotic. I&amp;rsquo;ve found they produce a great balance of quality and speed.&lt;/p&gt;
+
+&lt;p&gt;The second piece of the puzzle is an easier way to connect the timestamp values of highlight-quality frags with the demos in which they happened. One way to do this is to take a screenshot right after you make such frags during games. This has the advantage that Xonotic provides the bind for taking the screenshot (F12) out of the box, so you simply hit a key after you have a highlight frag to record the moment. The problem with this is that you have to manually cross-reference the screenshot&amp;rsquo;s filename with your demo filenames to figure out when and where you need to hit the record button. This is messy and error-prone. What we&amp;rsquo;d really like is a screenshot name that contains the map name and the wall-clock timestamp when it was created. It would be even better if we could also capture the in-game timestamp of when the frag occurred for precise timing (since in-game clocks don&amp;rsquo;t tally the time spent in warmup mode). Finding the right demo and time then becomes a breeze with this information at our disposal.&lt;/p&gt;
+
+&lt;p&gt;Fortunately there&amp;rsquo;s a simple bind script that can easily get us this information. Place the following into your config.cfg:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+alias topfrag_ts &#34;prvm_globalget client time  _thetime&#34;
+alias topfrag_cmd &#34;scr_screenshot_name \&#34;topfrags/${cl_worldbasename}-${_thetime}-\&#34;; wait; screenshot; wait; scr_screenshot_name \&#34;$scr_screenshot_name\&#34;&#34;
+alias topfrag_ss &#34;topfrag_ts; topfrag_cmd;&#34;
+bind BACKSPACE &#34;topfrag_ss&#34;
+&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;What this does is set up a special screenshot command that binds to the backspace button. When you hit backspace in-game, a jpg file will be created in your Xonotic &amp;ldquo;screenshots/topfrags&amp;rdquo; directory with a file name that contains the map name, the wall clock time, and the in-game timestamp. Easy! It is now dead simple to cross reference your highlight frags with the demos you made them in. The remaining piece is just for you to record them using the times provided.&lt;/p&gt;
+
+&lt;h3 id=&#34;recording&#34;&gt;Recording&lt;/h3&gt;
+
+&lt;p&gt;At this point you have a command that sends specially-formatted screenshots into a directory. Having collected a bunch of these screenshots, you now probably want to record the sweet, sweet frags they represent for posterity&amp;rsquo;s sake! Fortunately, this is the relatively easy part. The first step involves mapping the screenshots to their respective demo files. While you can eyeball the screenshot to demo relationship manually, I prefer using &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/screenshot_to_demo_second.py&#34;&gt;a simple Python script&lt;/a&gt; to do the mapping for me. If you choose to use this, edit the directories at the top of the script to match your demo and screenshot directories, run the script, then finally save the output for later.&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39;&gt;
+  &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/screenshot_mapping.png&#34; title=&#34;Example output of the screenshot -&amp;gt; demo mapping script.&#34;&gt;
+    &lt;img alt=&#34;Example output of the screenshot -&amp;gt; demo mapping script.&#34; title=&#34;Example output of the screenshot -&amp;gt; demo mapping script.&#34; data-src=&#34;/uploads/2014/6/RecordingXonotic/screenshot_mapping.png&#34;&gt;
+  &lt;/a&gt;
+    &lt;p class=&#39;wp-caption-text&#39;&gt;Example output of the screenshot -&amp;gt; demo mapping script.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;The last piece to the recording process is telling Xonotic to render our demos into playable videos. This is done most efficiently with &lt;a href=&#34;http://forums.xonotic.org/showthread.php?tid=1447&#34;&gt;Xonotic Demo Recorder by GreEn`mArine&lt;/a&gt;. For the rest of this post, I&amp;rsquo;ll illustrate this process.&lt;/p&gt;
+
+&lt;p&gt;First you bring up the demo recorder with &lt;code&gt;java -jar NexuizDemoRecorder-0.3.jar&lt;/code&gt; from your console of choice.&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39;&gt;
+  &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/demo_recorder_main_screen.png&#34; title=&#34;The demo recorder&amp;#39;s main screen.&#34;&gt;
+    &lt;img alt=&#34;The demo recorder&amp;#39;s main screen.&#34; title=&#34;The demo recorder&amp;#39;s main screen.&#34; data-src=&#34;/uploads/2014/6/RecordingXonotic/demo_recorder_main_screen.png&#34;&gt;
+  &lt;/a&gt;
+    &lt;p class=&#39;wp-caption-text&#39;&gt;The demo recorder&amp;#39;s main screen.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Next, set yourself up with a usable template for the future by hitting the &amp;ldquo;create&amp;rdquo; button. You&amp;rsquo;ll be prompted for a few things, but the most important piece is the location of the Xonotic binary you&amp;rsquo;ll be using. In the screenshot below I&amp;rsquo;m using the Linux+SDL binary provided in the autobuilds. Choose the one that&amp;rsquo;s right for your system. When you&amp;rsquo;re done, hit &amp;ldquo;create.&amp;rdquo;&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39;&gt;
+  &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/demo_recorder_template_screen.png&#34; title=&#34;The demo recorder&amp;#39;s template screen.&#34;&gt;
+    &lt;img alt=&#34;The demo recorder&amp;#39;s template screen.&#34; title=&#34;The demo recorder&amp;#39;s template screen.&#34; data-src=&#34;/uploads/2014/6/RecordingXonotic/demo_recorder_template_screen.png&#34;&gt;
+  &lt;/a&gt;
+    &lt;p class=&#39;wp-caption-text&#39;&gt;The demo recorder&amp;#39;s template screen.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Next, set up a recording job in the lower panel. To create a job using the template you just made, click once on the template name you want in the upper panel, then choose &amp;ldquo;create from template&amp;rdquo; in the lower panel. This is the part where the screenshot to demo mapping becomes truly useful. With the output of that script in hand, select the appropriate demo, enter your start and end seconds (I&amp;rsquo;ve chosen here to record for 10 seconds), and finally enter a filename, without suffix, for the resulting video. Click &amp;ldquo;create&amp;rdquo; to finish the process.&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39;&gt;
+  &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/demo_recorder_job_screen.png&#34; title=&#34;The demo recorder&amp;#39;s job screen.&#34;&gt;
+    &lt;img alt=&#34;The demo recorder&amp;#39;s job screen.&#34; title=&#34;The demo recorder&amp;#39;s job screen.&#34; data-src=&#34;/uploads/2014/6/RecordingXonotic/demo_recorder_job_screen.png&#34;&gt;
+  &lt;/a&gt;
+    &lt;p class=&#39;wp-caption-text&#39;&gt;The demo recorder&amp;#39;s job screen.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Repeat this process of adding jobs - using the template to make your life easier - until you are done with all of the clips you wish to render.&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39;&gt;
+  &lt;a href=&#34;https://chriswayg.github.io/uploads/2014/6/RecordingXonotic/demo_recorder_main_screen_2.png&#34; title=&#34;The demo recorder&amp;#39;s main screen after adding my frag clip.&#34;&gt;
+    &lt;img alt=&#34;The demo recorder&amp;#39;s main screen after adding my frag clip.&#34; title=&#34;The demo recorder&amp;#39;s main screen after adding my frag clip.&#34; data-src=&#34;/uploads/2014/6/RecordingXonotic/demo_recorder_main_screen_2.png&#34;&gt;
+  &lt;/a&gt;
+    &lt;p class=&#39;wp-caption-text&#39;&gt;The demo recorder&amp;#39;s main screen after adding my frag clip.&lt;/p&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Start the render by hitting the &amp;ldquo;start processing&amp;rdquo; button at the bottom and you&amp;rsquo;ll have the material for your YouTube video before you know it!&lt;/p&gt;
+
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;//www.youtube.com/embed/mEnw2rg5eCs&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;</description>
+    </item>
+    
+    <item>
+      <title>Unicode Characters</title>
+      <link>https://chriswayg.github.io/posts/2014/unicode/</link>
+      <pubDate>Fri, 16 May 2014 09:55:00 -0500</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2014/unicode/</guid>
+      <description>&lt;p&gt;The other day I was adding support for some unicode characters within &lt;a href=&#34;http://stats.xonotic.org&#34;&gt;XonStat&lt;/a&gt; and during the process stumbled upon a few helpful things. It turns out that many Linux applications provide for the easy entry of code point values with a simple key press combination: while holding the control and shift keys, enter &amp;lsquo;U&amp;rsquo; and then the unicode code point value to insert that character into whatever text buffer you&amp;rsquo;re currently working with. For example, entering the character &amp;ldquo;é&amp;rdquo; (at &lt;a href=&#34;http://en.wikibooks.org/wiki/Unicode/Character_reference/0000-0FFF&#34;&gt;code point&lt;/a&gt; 00E9) you would hold control and shift and then enter U, 0, 0, E, 9. Nice!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;p&gt;What&amp;rsquo;s even better is that Firefox is one of the apps that supports this entry method. This is especially useful for playing around with your @font-face declarations, since entry behaves the same way within the developer tools as well. That meant that instead of searching for a Xonotic player who had a special character in their nick (which is what I was testing), I could simply inspect their nickname and insert an arbitrary code point to see if it displayed the font&amp;rsquo;s glyph properly. Similarly, I could also specify any code point in a POST request for incoming data by doing the same thing if needed (at the time I didn&amp;rsquo;t).&lt;/p&gt;
+
+&lt;p&gt;The unfortunate thing is that many text editors have had the same functionality for a long time, and each has developed their own entry pattern. Entering these characters in Vim, for example, requires hitting Control-V while in insert mode, then entering U and the code point value. This isn&amp;rsquo;t bad at all, it&amp;rsquo;s just slightly different from how other applications handle it. I guess you can&amp;rsquo;t have it all!&lt;/p&gt;
+
+&lt;p&gt;During my testing process I also found out that Python 2 has several flavors of unicode literals developers can use. I was naively assuming that all code points could be entered with one syntax, so I was assembling four and five hex-character code points with the same format: \uXXXXX, with the Xs being the code point value in hexadecimal. My @font-face had its glyphs mostly in the four character range, but it did have a few in the five character range. It was those that weren&amp;rsquo;t working properly, which caused me endless frustration. I was entering &amp;ldquo;\u1F680&amp;rdquo; as the code point literal in the code, but I kept getting an omega symbol (U+1F68) and a 0 on my display! I kept scratching my head over this until I looked closely into the &lt;a href=&#34;https://docs.python.org/2/howto/unicode.html#unicode-literals-in-python-source-code&#34;&gt;Python documentation&lt;/a&gt;. I soon found out that there is a separate syntax for code points above the four character range: \UXXXXXXXX. The fix in my code was to change all of the five-character code points to have an upper-case U and to pad them such that they contained 8 hexadecimal characters in total. You can see a few examples of this change in &lt;a href=&#34;https://github.com/antzucaro/XonStat/blob/master/xonstat/util.py#L58&#34;&gt;this line of code&lt;/a&gt;. After making this change all of the glyphs in the font worked perfectly. Phew!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>2013 - The Year in Music</title>
+      <link>https://chriswayg.github.io/posts/2014/2013-the-year-in-music/</link>
+      <pubDate>Thu, 02 Jan 2014 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2014/2013-the-year-in-music/</guid>
+      <description>
+
+&lt;p&gt;Every December Kristin and I talk about our favorite albums and songs for the year, and it always leads to great conversations. We debate the merits of the artists, or how that one song really annoyed us in an otherwise spectacular album, or how that one band member has really lost their touch. You get the idea. 2013 was no exception to this, and we recently had our music chat two days before I had to go back to work after the holiday. After talking for a while, it occurred to me that our scrobbled music data was probably sitting on the net, ready to be analyzed. With the spare time I had left before getting back to business, it would be pretty cool to feed those discussions with some hard data to back up our feelings!&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;d been using Last.fm for quite a while, so I reckoned that we&amp;rsquo;d be able to get it back out easily from the service. What I needed was the artist, album, song, and timestamp for all the songs we listened to during 2013. Having this information would enable me to break down things by intervals of time quite nicely. A quick check on the Last.fm API page confirmed my suspicion: the &lt;a href=&#34;http://www.last.fm/api/show/user.getRecentTracks&#34;&gt;getRecentTracks&lt;/a&gt; API endpoint had all the pieces of info I was looking for (side note: if only all companies were like this!). I readied myself to fetch the data so I could fuel some more of those interesting discussions!&lt;/p&gt;
+
+&lt;p&gt;After signing up for an API key, I checked out the example URL to see what format I&amp;rsquo;d have to parse. I had two options: XML and JSON. Having a good enough familiarity with JSON already, I decided I&amp;rsquo;d try out XML to see how difficult it was. I figured that it was a good use of the &lt;a href=&#34;http://golang.org/&#34;&gt;golang&lt;/a&gt; standard library either way. I whipped up a quick and dirty script to fetch and save the data, fueled by simple command line options which mapped straight into the API&amp;rsquo;s parameters. I ended up with the small &lt;a href=&#34;#go-script&#34;&gt;Golang program&lt;/a&gt; at the bottom of this post. Also included at the bottom are the corresponding &lt;a href=&#34;#steps&#34;&gt;steps&lt;/a&gt; on how to use the data file once you have it.&lt;/p&gt;
+
+&lt;p&gt;Having fetched my data using this program, I next imported it to PostgreSQL so I could query it until my heart was content! Below are some of the questions that I answered with my new-found knowledge.&lt;/p&gt;
+
+&lt;h3 id=&#34;which-artists-did-we-listen-to-the-most&#34;&gt;Which artists did we listen to the most?&lt;/h3&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Daft Punk (468)&lt;/li&gt;
+&lt;li&gt;Nine Inch Nails (342)&lt;/li&gt;
+&lt;li&gt;Tame Impala (239)&lt;/li&gt;
+&lt;li&gt;Carbon Leaf (209)&lt;/li&gt;
+&lt;li&gt;How to Destroy Angels (171)&lt;/li&gt;
+&lt;li&gt;Dave Matthews Band (148)&lt;/li&gt;
+&lt;li&gt;Pink Floyd (144)&lt;/li&gt;
+&lt;li&gt;Cliff Martinez (138)&lt;/li&gt;
+&lt;li&gt;Trent Reznor and Atticus Ross (128)&lt;/li&gt;
+&lt;li&gt;Pearl Jam (125)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;A few surprises here. We discovered (har har) Daft Punk&amp;rsquo;s &lt;i&gt;Discovery&lt;/i&gt; album pretty early on and we didn&amp;rsquo;t let up on it all year, so that was expected. Nine Inch Nails has been a staple also, so nothing there either. What legitimately surprised me was how much Tame Impala showed up. I checked them out when &lt;i&gt;Lonerism&lt;/i&gt; came out and was hooked. I guess I got really hooked! That&amp;rsquo;s a lot of plays for only having two albums. Here&amp;rsquo;s to them creating more awesome music in the future!&lt;/p&gt;
+
+&lt;p&gt;Cliff Martinez was another pleasant surprise. At the beginning of the year we watched &lt;i&gt;Contagion&lt;/i&gt; and really admired the score. I grabbed it and have been enjoying its goodness ever since. I suppose I really do prefer that soundtrack for hacking more than anything else, which most likely explains the number of plays.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-many-different-artists-did-we-listen-to&#34;&gt;How many different artists did we listen to?&lt;/h3&gt;
+
+&lt;p&gt;We listened to 591 artists throughout the year. Whoa! This is a bit skewed since many of them come from SomaFM, Spotify, or Last.fm&amp;rsquo;s streaming capabilities. Still cool, though.&lt;/p&gt;
+
+&lt;h3 id=&#34;how-many-tracks-did-we-listen-to-per-month&#34;&gt;How many tracks did we listen to per month?&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;January - 774&lt;/li&gt;
+&lt;li&gt;February - 444&lt;/li&gt;
+&lt;li&gt;March - 951&lt;/li&gt;
+&lt;li&gt;April - 362&lt;/li&gt;
+&lt;li&gt;May - 651&lt;/li&gt;
+&lt;li&gt;June - 586&lt;/li&gt;
+&lt;li&gt;July - 931&lt;/li&gt;
+&lt;li&gt;August - 560&lt;/li&gt;
+&lt;li&gt;September - 810&lt;/li&gt;
+&lt;li&gt;October - 597&lt;/li&gt;
+&lt;li&gt;November - 656&lt;/li&gt;
+&lt;li&gt;December - 851&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I can only speculate about most of the numbers here. We went on vacation in August, so that explains the lower number of plays. That vacation followed a month where I was in the office for over 55 hours a week. Since I listen to a lot of music while in the office, it follows that the totals would be high. Closing out the year, December saw us listening to the Christmas channel on SomaFM a lot. That plus a lot of time off meant more time for music! Plus, cold weather meant we were inside more often than not.&lt;/p&gt;
+
+&lt;h3 id=&#34;which-artists-did-we-listen-to-the-most-by-month&#34;&gt;Which artists did we listen to the most by month?&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;January: Daft Punk (61)&lt;/li&gt;
+&lt;li&gt;February: Cliff Martinez (44)&lt;/li&gt;
+&lt;li&gt;March: Carbon Leaf (80)&lt;/li&gt;
+&lt;li&gt;April: Dave Matthews Band (46)&lt;/li&gt;
+&lt;li&gt;May: Daft Punk (121)&lt;/li&gt;
+&lt;li&gt;June: The Beatles (37)&lt;/li&gt;
+&lt;li&gt;July: Pearl Jam (45)&lt;/li&gt;
+&lt;li&gt;August: Nine Inch Nails (83)&lt;/li&gt;
+&lt;li&gt;September: Tame Impala (41)&lt;/li&gt;
+&lt;li&gt;October: Dave Matthews Band (38)&lt;/li&gt;
+&lt;li&gt;November: Trent Reznor and Atticus Ross (35)&lt;/li&gt;
+&lt;li&gt;December: Nine Inch Nails (45)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These numbers show how attached we get to new album releases. Most of the top hits are from album releases of the previous month. Carbon Leaf&amp;rsquo;s &lt;i&gt;Ghost Dragon Attacks Castle&lt;/i&gt; came out in Feb and Ninch Inch Nails&amp;rsquo; &lt;i&gt;Hesitation Marks&lt;/i&gt; came out in November. In each case we listened to the physical CDs for a while, then I finally got around to putting the music on our server where it was much easier to access (thus more plays). Daft Punk&amp;rsquo;s &lt;i&gt;Random Access Memories&lt;/i&gt; came out in May, but I got the digital copy and immediately transferred it for our listening enjoyment.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m pretty happy with this data, and the fact that I could get it back out of Last.fm pretty easily. Now that we&amp;rsquo;re into 2014 and I am graced with a Spotify subscription, I&amp;rsquo;ll try to be more conscious of diversity for the next 12 months. When I do this process next December, I want to see many more artists. Bring on the music!&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&#34;go-script&#34;&gt;&lt;script src=&#34;https://gist.github.com/antzucaro/8212369.js?file=summarizr.go&#34;&gt;&lt;/script&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a id=&#34;steps&#34;&gt;&lt;script src=&#34;https://gist.github.com/antzucaro/8212369.js?file=steps.txt&#34;&gt;&lt;/script&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Thoughts on Indie Game The Movie</title>
+      <link>https://chriswayg.github.io/posts/2013/thoughts-on-indie-game-the-movie/</link>
+      <pubDate>Mon, 11 Feb 2013 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2013/thoughts-on-indie-game-the-movie/</guid>
+      <description>&lt;p&gt;Last night I watched the documentary &lt;em&gt;Indie Game: The Movie&lt;/em&gt;. Made by &lt;a href=&#34;http://www.indiegamethemovie.com/about/&#34;&gt;two people&lt;/a&gt; from Canada, the film follows several indie game developers as they near the release of their games. As a part of a game development team, the film hit close to my heart. Even though I don&amp;rsquo;t get paid for developing like the protagonists in the film, I still empathized with them and all their struggles. A lot of the things in the film resonated with me.&lt;/p&gt;
+
+&lt;p&gt;First, the cinematography was phenomenal. The directors were really able to evoke moods and feelings for the scenes through imagery. The peaceful sunset shots of Santa Cruz, California framed the tense situation of Edmund McMillen (a resident) perfectly, and the industrial shots of behind-the-scenes PAX paired well with the anxiety present in Phil Fish&amp;rsquo;s life at the time. All throughout the film I kept looking over at Kristin and commenting how beautiful or appropriate the shots were.&lt;/p&gt;
+
+&lt;p&gt;Next, the subject matter couldn&amp;rsquo;t have been better. I don&amp;rsquo;t know if it was a twist of fate or good planning, but the two main subjects each had ample drama to pique my interest. The Super Meat Boy team was facing crunching deadlines and a finicky Xbox publishing system. You could almost see the gray hair sprouting on their heads and wrinkle lines forming on their faces due to the immense pressure they were under. Phil Fish, the guy behind Fez, had issues stemming from the loss of his company partner and all of the legal difficulties that entails. That, combined with the super-long development time of his game itself, made him a nervous wreck. At times he seemed manic, but it really struck me how human and honest with himself he was.&lt;/p&gt;
+
+&lt;p&gt;Lastly, I think the film resonated with me on a personal level because of my involvement in Xonotic. Oftentimes I get whacky requests that lead to hours and hours of debugging and/or new development, or in the very least a chunk of time out of my day for me to research enough to deliver a response to the requester. I find that the players (or worse, &lt;em&gt;prospective&lt;/em&gt; players) of the game don&amp;rsquo;t really have a good grasp on the level of effort required to deliver these things, which gets me a little depressed at times. What seems easy to them can actually be back-breaking for me. This is exactly what I was thinking when Phil Fish went on a diatribe about people complaining about his long development cycle on Fez: he&amp;rsquo;s just one guy, give him a break! I feel similarly about Xonotic – we&amp;rsquo;re really just 4 or 5 people, give us some time!&lt;/p&gt;
+
+&lt;p&gt;Far and away the biggest impact on me came from a rather candid interview with Edmund towards the end of the film. He talks about how his goal was to inspire the next generation of game makers by showing them that fun, creative, and ultimately sellable games are within the reach of everyday people. I know it sounds cliché – the little guy can persevere! - but it&amp;rsquo;s true, and I see it happening in the open source world today.  If only two people (Edmund and Tommy) can make Super Meat Boy, what can Xonotic do with an army of contributors?&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coder&#39;s Block</title>
+      <link>https://chriswayg.github.io/posts/2012/coders-block/</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2012/coders-block/</guid>
+      <description>&lt;p&gt;Right now I’m in a bit of a rut when it comes to getting things done in the software world. When I get home, I want to physically take care of things around the house instead of hack. Instead of working on XonStat, I look forward to pruning the trees in the front yard and planning for the next home improvement. This is strange for me, as I’m used to coming home and pruning things in my &lt;i&gt;software&lt;/i&gt; late into the night and loving it.&lt;/p&gt;
+
+&lt;p&gt;I will admit that recent events have taken their toll on me. Maybe they’ve even altered the way I  view software of late. See, two weeks back my wife went through surgery to remove her cancerous thyroid. I didn’t want anyone in the waiting room with me, so I was mostly alone through the rather long surgery. To burn the time and to keep my mind off of things I brought my laptop to the hospital with me. Of course as soon as she was wheeled away from me that laptop was on and humming, and my fingers streaming keys into my vim console as fast as I could think them up. That day I developed a ton of features for XonStat, but I wonder if that day also associated the activity of coding with feelings of loneliness and depression in my subconscious.&lt;/p&gt;
+
+&lt;p&gt;It isn’t that the hospital itself was depressing either. By all means everything about our situation was positive. Besides the fact that she had cancer, Kristin’s diagnosis was the best one possible. They’d caught it early and it wasn’t life threatening. Despite this the whole situation was still overwhelming, and I think it impacted me more than I initially thought. When everything happens so fast I suppose you don’t have the luxury of really analyzing your situation. You’re just along for the ride, and you’re lucky enough if you can think about it deeply later!&lt;/p&gt;
+
+&lt;p&gt;Whatever it may be that’s contributing to my code block, I have a plan to counteract the damage. I’m going to start small because I think that is the answer. I’m going to do some trivial change - refactor some code, maybe - just to drive some feeling back into my fingers. With any luck the little pebbles I’ll move with that teeny change will start a landslide in my development activity again.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Making progress on the block</title>
+      <link>https://chriswayg.github.io/posts/2012/making-progress-on-the-block/</link>
+      <pubDate>Sat, 30 Jun 2012 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2012/making-progress-on-the-block/</guid>
+      <description>&lt;p&gt;Welp, I&amp;rsquo;ve made my progress on coding. It was &lt;a href=&#34;https://github.com/antzucaro/XonStat/commit/9f4a482f6194a036232e55b6e6917305ab98589c&#34; title=&#34;yeah, teeny&#34;&gt;trivial&lt;/a&gt;, but I hope it will whet my coding appetite! I just did the commit a few minutes back. It felt good, but more importantly it felt natural. That&amp;rsquo;s a start.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Smush - The Python Image Compressor</title>
+      <link>https://chriswayg.github.io/posts/2011/smush-the-python-image-compressor/</link>
+      <pubDate>Wed, 06 Apr 2011 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2011/smush-the-python-image-compressor/</guid>
+      <description>&lt;p&gt;Like the good web citizen I am, I was looking the other day on &lt;a href=&#34;http://www.webpagetest.org&#34; title=&#34;WebPagetest home page&#34;&gt;WebPagetest&lt;/a&gt; to see how this very site fared in terms of speed. Being that it is a static site I was expecting to take home a good grade report to my Mom and Dad, but lo and behold I was greeted with the following after waiting for the test to finish:&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39; style=&#39;width: 433px; margin-left: auto; margin-right: auto;&#39;&gt;
+&lt;img width=&#39;423px&#39; height=&#39;122px&#39; alt=&#34;Ouch&#34; title=&#39;Ouch&#39; src=&#39;https://chriswayg.github.io/uploads/2011/04/webpagetest.gif&#39;&gt;
+&lt;p class=&#39;wp-caption-text&#39;&gt;Ouch!&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Fs almost across the board. Ouch. Unless those Fs meant &amp;ldquo;fantastic,&amp;rdquo; I wasn&amp;rsquo;t doing a very good job. Looking across those categories I identified one area that I thought was an easy target to improve upon - image compression. Seeing as I&amp;rsquo;d read about compression after reading &lt;a href=&#34;http://stevelosh.com/&#34; title=&#34;Steve Losh&#39;s home page&#34;&gt;Steve Losh&amp;rsquo;s&lt;/a&gt; &lt;a href=&#34;http://stevelosh.com/blog/2010/01/moving-from-django-to-hyde/&#34; title=&#34;Steve&#39;s static website post&#34;&gt;post&lt;/a&gt; on how he did his static site (probably from a &lt;a href=&#34;http://news.ycombinator.com&#34; title=&#34;Hacker News home page&#34;&gt;Hacker News&lt;/a&gt; link somewhere), I thought I&amp;rsquo;d do the same. While the aforementioned post listed a Ruby utility for handling the compression of directories of images (recursively, of course), I&amp;rsquo;m a Python guy. To Google I went to find a Python compression utility for images.&lt;/p&gt;
+
+&lt;p&gt;Eventually I found something that met my requirements: &lt;a href=&#34;https://github.com/thebeansgroup/smush.py&#34; title=&#34;Smush&#39;s github home page&#34;&gt;smush.py&lt;/a&gt;. It compresses jpgs, pngs, and gifs recursively in their directories. Nice!  I did have one issue before I could start playing with it, however: Python 2.6 is standard on Ubuntu 10.10 (which I&amp;rsquo;m running), so I had to go grab Python 2.7. Nothing a little command line action couldn&amp;rsquo;t fix quickly:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;
+wget http://python.org/ftp/python/2.7.1/Python-2.7.1.tgz
+tar -xvzf Python-2.7.1.tgz
+cd Python-2.7.1
+./configure
+make
+sudo make altinstall
+&lt;/pre&gt;
+
+&lt;p&gt;Note that I&amp;rsquo;m using the &amp;ldquo;altinstall&amp;rdquo; option here, as I didn&amp;rsquo;t want to mess with my default (2.6) Python installation on Ubuntu.&lt;/p&gt;
+
+&lt;p&gt;Anyway, once I apt-get install-ed the rest of the requirements listed in the README I fired off the script on my directory of images that I use for this site. Lots of messages scrolled by talking about &amp;ldquo;converting to progressive&amp;rdquo; and such, finally terminating in this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;
+Smushing Finished
+
+1236 files scanned:
+    0 GIFs optimised out of 0 scanned. Saved 0kb
+    0 GIFGIFs optimised out of 0 scanned. Saved 0kb
+    507 JPEGs optimised out of 1215 scanned. Saved 6479kb
+    10 PNGs optimised out of 21 scanned. Saved 77kb
+Total time taken: 264.42 seconds
+&lt;/pre&gt;
+
+&lt;p&gt;Given that my image directory is 118M, a savings of about 6.5M is a 5.5% improvement. Not bad! After rsync-ing those images to my media subdomain I checked webpagetest again:&lt;/p&gt;
+
+&lt;div class=&#39;wp-caption aligncenter&#39; style=&#39;width: 433px; margin-left: auto; margin-right: auto;&#39;&gt;
+&lt;img width=&#39;423px&#39; height=&#39;122px&#39; alt=&#34;Ouch. Again.&#34; title=&#39;Ouch. Again.&#39; src=&#39;https://chriswayg.github.io/uploads/2011/04/webpagetest.gif&#39;&gt;
+&lt;p class=&#39;wp-caption-text&#39;&gt;Ouch. Again.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Hrm. Looking further into the details I found out that webpagetest grades the compression of the photos on the page based on how close in size they are to the same image when compressed with a quality level of 50 (for JPEG) in Photoshop. Okay&amp;hellip;got it. I tested out some of my photographs (the main content of my site, really) with that quality level and was not impressed. For sure I could do better than the level I&amp;rsquo;m currently saving at w/ ImageMagick&amp;rsquo;s convert utility, but I&amp;rsquo;m not willing to go all the way down to 50 - those test images looked blocky and ugly. It was clear that I wasn&amp;rsquo;t ever going to get that &amp;lsquo;A&amp;rsquo; I wanted. Since I&amp;rsquo;m always going to fail that particular test, I&amp;rsquo;ll just have to be content with saving as much space as I can while retaining the quality level I want for my photographs. Using smush.py I can get that. It&amp;rsquo;s a shame I couldn&amp;rsquo;t have my cake and eat it too, though. C&amp;rsquo;est la vie!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Last.fm and MOC</title>
+      <link>https://chriswayg.github.io/posts/2011/last-fm-and-moc/</link>
+      <pubDate>Wed, 02 Feb 2011 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2011/last-fm-and-moc/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of &lt;a href=&#34;http://www.last.fm&#34;&gt;Last.fm&lt;/a&gt;. For those not aware, it is a music recommendation service. It does its recommendations based on your own listening patterns; it watches the tracks you play on your computer and compares it to those played by other people sharing common artists. As an example, Last.fm recommends that I check out the band Catch 22 (who I do not have in my music library) based on the number of times I&amp;rsquo;ve played songs by Less Than Jake and because other people who have listened to Less Than Jake listen to Catch 22. Pretty cool.&lt;/p&gt;
+
+&lt;p&gt;One thing that is critical to the entire Last.fm experience is the connection between the music player you use and the Last.fm servers that make the recommendations. If you don&amp;rsquo;t have that connection, you won&amp;rsquo;t get any recommendations! Forming the bridge between the two is something called a &lt;em&gt;scrobbler; &lt;/em&gt;the scrobbler is the piece of software that watches what you&amp;rsquo;re playing on your music player and sends that information over to the recommendation servers. Last.fm provides a scrobbler client for both Windows and Mac as a free download. Although not officially supported, Linux users can still participate with plugins for many popular players (Amarok, Rhythmbox, Audacious).&lt;/p&gt;
+
+&lt;p&gt;Even Linux music players without ready-made plugins can use the service through a software package called &lt;a href=&#34;http://www.red-bean.com/decklin/lastfmsubmitd/&#34;&gt;lastfmsubmitd&lt;/a&gt;. This software package sets up a generic way for players to send data over to Last.fm via the standard client/server model familiar to most Linux users. Here&amp;rsquo;s how I set it up with MOC, a popular command-line music player.
+&lt;h3&gt;Get the lastfmsubmitd package&lt;/h3&gt;
+I run Ubuntu on my home theater PC, which is where I play most of my music at home. To install lastfmsubmitd there I ran the following:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;sudo apt-get install lastfmsubmitd&lt;/pre&gt;
+
+&lt;p&gt;During the installation you&amp;rsquo;ll be asked several straightforward questions (username, password), after which you&amp;rsquo;ll be left with a running lastfmsubmitd daemon. Check to make sure it is up and running with:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;ps -ef | grep lastfmsubmit[d]&lt;/pre&gt;
+
+&lt;p&gt;You should see a process running under that name. If not, the following should get you up and running:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;sudo /etc/init.d/lastfmsubmitd start&lt;/pre&gt;
+
+&lt;p&gt;The next step is hooking up your player to submit information to lastfmsubmitd.
+&lt;h3&gt;Change your MOC configuration&lt;/h3&gt;
+MOC is my music player of choice, and unfortunately it is one that doesn&amp;rsquo;t have a prebuilt plugin for Last.fm. Instead I have to add the following in my ~/.moc/config file to make MOC submit the songs I play to lastfmsubmitd:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;OnSongChange = &amp;quot;/usr/lib/lastfmsubmitd/lastfmsubmit --artist %a --title %t --length %d --album %r&amp;quot;&lt;/pre&gt;
+
+&lt;p&gt;What this does is submit each song to lastfmsubmitd when you start playing it. lastfmsubmitd then submits the song data to the actual Last.fm servers using its own built in submission client (that&amp;rsquo;s the /usr/lib/lastfmsubmitd/lastfmsubmit part). Take note that this method sends data &lt;em&gt;right when the song changes&lt;/em&gt;. If you are a habitual song-changer and don&amp;rsquo;t feel like spamming Last.fm with songs that you really haven&amp;rsquo;t listened to fully, check out Luke Plant&amp;rsquo;s submission script &lt;a href=&#34;http://lukeplant.me.uk/blog/posts/moc-and-last-fm/&#34;&gt;here&lt;/a&gt;, as it may suit you better. I rarely skip around in songs, so I just stick with the default submission client (the one in the OnSongChange config above) .
+&lt;h3&gt;Restart and Verify!&lt;/h3&gt;
+You have to completely restart MOC before the configuration option goes into effect. Take care to kill the process if it is still running after you&amp;rsquo;ve exited to the terminal, as MOC is a server process. Once you&amp;rsquo;ve verified that the process is gone, fire up &amp;lsquo;mocp&amp;rsquo; again and play a song or two. Check your Last.fm profile page shortly after you start the song. If you see it showing up in the list, you&amp;rsquo;re in business!&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 630px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/02/verified.png&#34;&gt;&lt;img class=&#34;size-full wp-image-650&#34; title=&#34;Verified!&#34; src=&#34;https://chriswayg.github.io/uploads/2011/02/verified.png&#34; alt=&#34;Verified!&#34; width=&#34;630&#34; height=&#34;435&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Verified!&lt;/p&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Planning ahead for MySQL partitioning</title>
+      <link>https://chriswayg.github.io/posts/2011/planning-ahead-for-mysql-partitioning/</link>
+      <pubDate>Sun, 30 Jan 2011 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2011/planning-ahead-for-mysql-partitioning/</guid>
+      <description>&lt;p&gt;&lt;h3&gt;The Scenario&lt;/h3&gt;
+Let&amp;rsquo;s suppose you are modeling a database in MySQL 5.5. Based on your knowledge of the requirements for the application &lt;em&gt;behind &lt;/em&gt;this database you can guess which of the tables within it are going to be huge. For those huge tables you want to plan ahead to make sure that you can scale out your data such that you have less headaches in the future. Here&amp;rsquo;s the catch: you want to keep it simple until it comes time to scale out. That sounds like an honorable goal, right? Now how exactly do we do that&amp;hellip;hmm. This post is how I would approach this problem. I hope you can gain something from it. I certainly learned some things in trying to get this stuff to work!&lt;/p&gt;
+
+&lt;p&gt;To ground this problem scenario into something concrete let&amp;rsquo;s assume that we&amp;rsquo;re modeling a simple relationship - players and games in a multiplayer game. Here&amp;rsquo;s the model that we&amp;rsquo;re after:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 559px&#34;&gt;&lt;span style=&#34;font-size: x-small;&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/normal_relationship.png&#34;&gt;&lt;img class=&#34;size-full wp-image-613&#34; title=&#34;Multiplayer game ER diagram&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/normal_relationship.png&#34; alt=&#34;Multiplayer game ER diagram&#34; width=&#34;559&#34; height=&#34;149&#34; /&gt;&lt;/a&gt;&lt;/span&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Multiplayer game ER diagram&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is the DDL to create this model:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:sql;&#34;&gt;
+CREATE  TABLE IF NOT EXISTS `parttest`.`player` (
+`player_id` INT NOT NULL ,
+`name` VARCHAR(30) NULL ,
+PRIMARY KEY (`player_id`) )
+ENGINE = InnoDB;
+
+CREATE  TABLE IF NOT EXISTS `parttest`.`game` (
+`game_id` INT NOT NULL ,
+`duration` TIME NULL ,
+`start_dt` TIMESTAMP NOT NULL ,
+PRIMARY KEY (`game_id`) )
+ENGINE = InnoDB;
+
+CREATE  TABLE IF NOT EXISTS `parttest`.`player_game` (
+`player_id` INT NOT NULL ,
+`game_id` INT NOT NULL ,
+`create_dt` TIMESTAMP NOT NULL ,
+PRIMARY KEY (`player_id`, `game_id`) ,
+INDEX `player_game_fk01` (`player_id` ASC) ,
+INDEX `player_game_fk02` (`game_id` ASC) ,
+CONSTRAINT `player_game_fk01`
+FOREIGN KEY (`player_id` )
+REFERENCES `parttest`.`player` (`player_id` )
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT `player_game_fk02`
+FOREIGN KEY (`game_id` )
+REFERENCES `parttest`.`game` (`game_id` )
+ON DELETE NO ACTION
+ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+&lt;/pre&gt;
+
+&lt;p&gt;In this model we have players and games. Many players can participate in a single game and many games can be played by a single player, thus the two tables &amp;ldquo;player&amp;rdquo; and &amp;ldquo;game&amp;rdquo; have a many-to-many relationship. To represent that in the database we have an associative table (&amp;ldquo;player_game&amp;rdquo;) between the two. Also included in two of the tables are columns that track when something happened.&lt;/p&gt;
+
+&lt;p&gt;For the sake of this example let&amp;rsquo;s assume that there won&amp;rsquo;t be too many players, but those limited amount of players will play the game feverishly (it&amp;rsquo;s an addictive open source game with a small community). That means that the &amp;ldquo;game&amp;rdquo; table and the associative &amp;ldquo;player&lt;em&gt;game&amp;rdquo; table will be pretty large as time goes by - those are the two tables that we&amp;rsquo;ll want to make scalable for the future. We&amp;rsquo;ll want the option to easily &lt;em&gt;partition &lt;/em&gt;them at some point down the line.
+&lt;h3&gt;Enter Partitioning&lt;/h3&gt;
+Wait, wait, wait. &lt;em&gt;Partitioning&lt;/em&gt;? What the heck is that for? I won&amp;rsquo;t bore you with too many details (you can find out more &amp;lt;a href=&amp;ldquo;&lt;a href=&#34;http://en.wikipedia.org/wiki/Partition&#34;&gt;http://en.wikipedia.org/wiki/Partition&lt;/a&gt;&lt;/em&gt;(database)&amp;ldquo;&amp;gt;here&lt;/a&gt; and &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.5/en/partitioning.html&#34;&gt;here&lt;/a&gt;), so let&amp;rsquo;s just say that partitioning is a way to split up your database tables in to smaller pieces so that operations upon them can be faster (in most situations that is the goal, at least). Partitions provide the following benefits (this is some, not all):
+&lt;ul&gt;
+    &lt;li&gt;Maintenance - when you split up     tables into partitions you can often do maintenance on them such    that you only affect a small amount of your users at a time. Having     partitions also allows you to easily implement a pruning or     archiving strategies depending on how you split the data. If you    split up your tables based upon create timestamp, for example, you  can easily drop or move older data (the ones that aren&amp;rsquo;t queried as     often as the newer ones) via a singleo command.&lt;/li&gt;
+    &lt;li&gt;Query performance - running     queries against large datasets most often causes problems. When the     data is partitioned the database can â€œautomagicallyâ€ determine  which partitions aren&amp;rsquo;t involved in queries; it can tell which  partitions aren&amp;rsquo;t involved in the WHERE clause of your SQL  statements, thus it doesn&amp;rsquo;t need to scan them. That means you   traverse less data to get the information your query needs, which in    turn equals faster performance! Of course this only applies if the  WHERE clause of the queries in question can avoid partitions. If you    are grabbing everything from a table partitioning obviously won&amp;rsquo;t   help you.&lt;/li&gt;
+    &lt;li&gt;Availability - partitions can be    split onto different physical media, which means your table is still    partially available even if one of those media sources goes down.   This also has impacts with respect to maintenance (see above).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Implemention (some hurdles to jump)&lt;/h3&gt;
+Back to the example. Since we know that the &amp;ldquo;game&amp;rdquo; and &amp;ldquo;player_game&amp;rdquo; tables are going to be big, let&amp;rsquo;s see how to set ourselves up for easy partitioning in the future. The goal here is to get to a partitioned table with a minimum number of ALTER TABLE statements. Ideally we&amp;rsquo;d have only one ALTER TABLE - to add partitioning! Let&amp;rsquo;s project ourselves into the future to the point in time when our data is so large that we are forced to consider partitioning. Fortunately for us our tables have no data in them, which makes our tests quick and relatively painless.&lt;/p&gt;
+
+&lt;p&gt;Given the initial DDL, the first step would be to try the obvious: alter the table to add partitioning! Let&amp;rsquo;s give that a try:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:sql;&#34;&gt;ALTER TABLE game
+
+PARTITION BY RANGE(unix_timestamp(start_dt)) (
+
+PARTITION part0 VALUES LESS THAN (unix_timestamp(&#39;2011-01-01 00:00:00&#39;)),
+
+PARTITION part1 VALUES LESS THAN (unix_timestamp(&#39;2011-01-02 00:00:00&#39;)),
+
+PARTITION part2 VALUES LESS THAN (unix_timestamp(&#39;2011-01-03 00:00:00&#39;)),
+
+PARTITION part3 VALUES LESS THAN (unix_timestamp(&#39;2011-01-04 00:00:00&#39;)),
+
+PARTITION part4 VALUES LESS THAN (unix_timestamp(&#39;2011-01-05 00:00:00&#39;)));
+
+&lt;/pre&gt;
+
+&lt;p&gt;Okay, that failed with the following. Bummer:&lt;/p&gt;
+
+&lt;p&gt;[code]ERROR 1217 (23000): Cannot delete or update a parent row: a foreign key constraint fails[/code]&lt;/p&gt;
+
+&lt;p&gt;The only table in our model with foreign keys is &amp;ldquo;player_game,&amp;rdquo; so let&amp;rsquo;s remove those constraints to move forward. Let&amp;rsquo;s do that:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:sql;&#34;&gt;alter table player_game drop foreign key player_game_fk01;
+alter table player_game drop foreign key player_game_fk02;&lt;/pre&gt;
+
+&lt;p&gt;We can now try to partition again. We run the same alter as before and get the following:&lt;/p&gt;
+
+&lt;p&gt;[code]ERROR 1503 (HY000): A PRIMARY KEY must include all columns in the table&amp;rsquo;s partitioning function[/code]&lt;/p&gt;
+
+&lt;p&gt;Argh! What in the world does this mean? Looking up this error leads us to &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.5/en/partitioning-limitations-partitioning-keys-unique-keys.html&#34;&gt;this entry&lt;/a&gt; in the manual which tells us why. In short: you can&amp;rsquo;t partition a table using a column that is not included in the primary key for that table. Since the &amp;ldquo;start_dt&amp;rdquo; column isn&amp;rsquo;t in our primary key, we couldn&amp;rsquo;t proceed with our alter. Okay, so let&amp;rsquo;s add it:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:sql;&#34;&gt;ALTER TABLE game DROP PRIMARY KEY;
+
+ALTER TABLE game ADD PRIMARY KEY (game_id, start_dt);&lt;/pre&gt;
+
+&lt;p&gt;Once more with the alter to partition, as before. Cross your fingers&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;[code]Query OK, 0 rows affected (0.05 sec)[/code]&lt;/p&gt;
+
+&lt;p&gt;Success! Now all we need to do is the same ALTERs to the player_game table (using the same process we just did) and add back those foreign keys that we dropped earlier. We&amp;rsquo;ll then have our model looking like before but with the added benefit of 5 partitions each for game and player_game.&lt;/p&gt;
+
+&lt;p&gt;But wait&amp;hellip;&lt;/p&gt;
+
+&lt;pre class=&#34;brush:sql;&#34;&gt;ALTER TABLE player_game ADD CONSTRAINT player_game_fk01 FOREIGN KEY (game_id) REFERENCES game (game_id);
+
+ERROR 1005 (HY000): Can&#39;t create table &#39;parttest.#sql-52b_3e&#39; (errno: 150)&lt;/pre&gt;
+
+&lt;p&gt;Again - argh! What is wrong now? Going back to the limitations link from the last error gives us the answer: partitioned tables can&amp;rsquo;t have foreign keys. Yep, you heard me correctly - &lt;strong&gt;partitioned tables can&amp;rsquo;t be involved in any foreign keys. &lt;/strong&gt;Really, who needs referential integrity anyway? Just kidding, as this &lt;em&gt;really&lt;/em&gt; &lt;em&gt;big &lt;/em&gt;limitation in my opinion.&lt;/p&gt;
+
+&lt;p&gt;Seeing as we&amp;rsquo;ve already dropped the foreign keys of the player_game table to get to this point, we don&amp;rsquo;t have anything further to do. To get where we are we had to remove the foreign keys from the tables that we&amp;rsquo;d be partitioning, and we had to move the column we were partitioning on into the primary key.
+&lt;h3&gt;My recommendations&lt;/h3&gt;
+What does all this mean in terms of how to design your tables now, when they aren&amp;rsquo;t in a partitioned state? Here&amp;rsquo;s my recommendations based on what I&amp;rsquo;ve seen with partitioning thus far:
+&lt;ul&gt;
+    &lt;li&gt;Build the column you will   be partitioning on in to    the primary key from the get-go. Make   sure the ordering of the primary key (if you will have multiple     columns at all) makes sense for your query load on the table. Put   the columns most used in WHERE clauses first.&lt;/li&gt;
+    &lt;li&gt;As an alternative to the    above you can keep your primary key the same but add    a unique key including all the columns of the primary key plus the  column you&amp;rsquo;ll partition on. This will help you avoid duplicate  entries when you want to bring the partitioning column into the     primary key, but you&amp;rsquo;ll have a few additional steps later (dropping     and recreate the primary key).&lt;/li&gt;
+    &lt;li&gt;Keep the foreign keys in    the database in place as    long as you can while it is still available, but plan ahead in the  application by coding as if they weren&amp;rsquo;t there.     When the time comes to  partition you can then be confident that all the data up to that    point is clean in terms of its referential integrity. You&amp;rsquo;ll also   have debugged your application to flush out the errors by that time     (hopefully).&lt;/li&gt;
+&lt;/ul&gt;
+So those are my recommendations for dealing with MySQL 5.5&amp;rsquo;s partitioning. Obviously I think they can do a lot better with their implementation. Ideally I&amp;rsquo;d like to have the ability to alter the table and add the partitions regardless of its referential integrity or primary keys. The fact that I have to sacrifice the integrity of the database tables (one of the key strong points of having a relational database in the first place) makes me very hesitant to use it at all.
+&lt;h3&gt;Some Caveats&lt;/h3&gt;
+I&amp;rsquo;m an Oracle DBA, so take this advice with a grain of salt. The stuff in this post is just one solution to the &amp;ldquo;big data&amp;rdquo; problem. Furthermore this is just how I would handle a partitioning situation given the example provided. I&amp;rsquo;d love to hear some people with more experience chime in on what they do in similar situations.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backing up the Acer Revo 3700</title>
+      <link>https://chriswayg.github.io/posts/2011/backing-up-the-acer-revo-3700/</link>
+      <pubDate>Sun, 23 Jan 2011 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2011/backing-up-the-acer-revo-3700/</guid>
+      <description>&lt;p&gt;In my previous post I told you about my Acer Aspire Revo 3700 - awesome things come in small packages! Unfortunately, as great as the overall package is the default operating system included was Windows 7. That&amp;rsquo;s a definite no-go, as I&amp;rsquo;m not a fan of anything coming out of Microsoft. Obviously that had to go! Being the practical person I am, I didn&amp;rsquo;t want to blow the Windows software &lt;em&gt;completely&lt;/em&gt; away. I wanted to keep a backup copy &amp;ldquo;just in case.&amp;rdquo; What case, you ask? &lt;em&gt;I don&amp;rsquo;t really know, but I like to keep my options open anyway. &lt;/em&gt;Here&amp;rsquo;s how I did it.&lt;/p&gt;
+
+&lt;p&gt;Normally I&amp;rsquo;d just fire up my handy copy of &lt;a href=&#34;http://www.sysresccd.org/Main_Page&#34;&gt;SystemRescueCD&lt;/a&gt; to do the backup, but the Revo 3700 doesn&amp;rsquo;t have a CD drive. Bummer. I&amp;rsquo;d have to boot from a USB image instead. On first glance SystemRescueCD&amp;rsquo;s USB disk creation process seemed like too much work, so I looked for another Linux distribution that might work better. After a small bit of research I ended up settling on &lt;a href=&#34;http://grml.org/&#34;&gt;grml&lt;/a&gt;, which is a Debian-based distribution intended for textmode-savvy users. I followed the instructions I found on their &lt;a href=&#34;http://grml.org/download/&#34;&gt;download&lt;/a&gt; page to install the disk image onto my 2GB USB drive:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;dd if=grml_2010.12.iso of=/dev/sdb&lt;/pre&gt;
+
+&lt;p&gt;Be careful with that &amp;ldquo;of=&amp;rdquo; line if you do this - your USB &lt;em&gt;might not be /dev/sdb&lt;/em&gt;! I only have one hard disk on my laptop, so my thumb drives always show up as /dev/sdb when I plug them in. You can verify which letter your thumb drive is by running &amp;ldquo;dmesg&amp;rdquo; in your terminal just after you insert the drive. You should see something like this, the bottom of which will tell you the drive identifier of your USB:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;
+ant@longstreet:~% dmesg
+...
+[lots of lines snipped]
+...
+[16937.696105] usb 1-3: new high speed USB device using ehci_hcd and address 2
+[16938.005504] Initializing USB Mass Storage driver...
+[16938.005646] scsi2 : usb-storage 1-3:1.0
+[16938.005760] usbcore: registered new interface driver usb-storage
+[16938.005762] USB Mass Storage support registered.
+[16939.005085] scsi 2:0:0:0: Direct-Access     PNY      USB 2.0 FD       8.02 PQ: 0 ANSI: 0 CCS
+[16939.006616] sd 2:0:0:0: Attached scsi generic sg2 type 0
+[16939.007781] sd 2:0:0:0: [sdb] 15695871 512-byte logical blocks: (8.03 GB/7.48 GiB)
+[16939.008264] sd 2:0:0:0: [sdb] Write Protect is off
+[16939.008273] sd 2:0:0:0: [sdb] Mode Sense: 45 00 00 08
+[16939.008280] sd 2:0:0:0: [sdb] Assuming drive cache: write through
+[16939.012131] sd 2:0:0:0: [sdb] Assuming drive cache: write through
+[16939.012145]  sdb: sdb1
+[16939.015272] sd 2:0:0:0: [sdb] Assuming drive cache: write through
+[16939.015282] sd 2:0:0:0: [sdb] Attached SCSI removable disk
+&lt;/pre&gt;
+
+&lt;p&gt;Now back to the backup process. After my dd command finished, I popped my newly-created disk into my Revo. I hit f12 during boot to tell it to boot from USB and I was quickly in business. Speaking of business, my first order was to mount the device on which I would store the backup itself. In my case I was using a USB external hard drive that I mounted with the following command (using the same &amp;ldquo;dmesg&amp;rdquo; trick I mentioned above):&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;mount /dev/sdb1 /media/backup&lt;/pre&gt;
+
+&lt;p&gt;My next task was to back up my partition table. In the event that I had to restore what I was about to back up I would need to know how it was physically laid out. I ran the following to save that sweet, sweet partition table:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;ï»¿ï»¿sfdisk -d /dev/sda &amp;gt; /media/backup/revo_parttable.bak&lt;/pre&gt;
+
+&lt;p&gt;My next step was to mount the media needing to be backed up. There were three partitions on the stock Revo image, so I created a mount directory for each partition. Keeping things simple I just named these directories after the partitions themselves (being the simple man I am):&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;for i in 1 2 3
+do
+mkdir -p /media/sda${i}
+mount /dev/sda${i} /media/sda${i}
+done&lt;/pre&gt;
+
+&lt;p&gt;Having those partitions mounted, next up was backing up the actual data. For this task I used my favorite backup utility DAR (For Disk ARchive). DAR is awesome - really, it deserves its own post (which I am now writing down on my TODO list)! For now, though, I&amp;rsquo;ll just list the commands I used:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;dar  -R /media/sda1 --gzip 1 -s 2G -c /media/backup/revo_sda1_201001
+dar  -R /media/sda2 --gzip 1 -s 2G -c /media/backup/revo_sda2_201001
+dar  -R /media/sda3 --gzip 1 -s 2G -c /media/backup/revo_sda3_201001&lt;/pre&gt;
+
+&lt;p&gt;Okay, okay. I&amp;rsquo;ll at least give you a breakdown of those command line switches even if I can&amp;rsquo;t get to talking about DAR in depth (who knows if I will, right?).
+&lt;ul&gt;
+    &lt;li&gt;-R defines the source of your backup. In this case I&amp;rsquo;ve mounted each one of the Revo&amp;rsquo;s partitions to a similarly named mount point. Each of those mount points gets backed up.&lt;/li&gt;
+    &lt;li&gt;&amp;ndash;gzip 1 tells DAR to compress the backup using the gzip algorithm. You can specify the level of compression (from 1 to 10, with 10 yielding the smallest image). Here I&amp;rsquo;ve used the lowest level of gzip compression.&lt;/li&gt;
+    &lt;li&gt;-s splits the backup into pieces (slices). I&amp;rsquo;ve specified 2GB slices, meaning when the current backup slice reaches 2GB it will start working on a new slice with a different name (it appends an incrementing number to the filename before the suffix).&lt;/li&gt;
+    &lt;li&gt;-c is the name of the actual backup. It is called a &amp;ldquo;basename&amp;rdquo; because the different slices will take on the incrementing number I mentioned above.&lt;/li&gt;
+&lt;/ul&gt;
+After those dar commands ran above I was left with the following in my backup directory (I mounted this on my laptop, thus /media/usb and not /media/backup). Sweet!&lt;/p&gt;
+
+&lt;p&gt;&lt;pre class=&#34;brush:bash;&#34;&gt;
+ant@longstreet:~% ls -lthrg /media/usb/*dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:01 /media/usb/revo_sda1_201001.1.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:08 /media/usb/revo_sda1_201001.2.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:14 /media/usb/revo_sda1_201001.3.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:20 /media/usb/revo_sda1_201001.4.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:26 /media/usb/revo_sda1_201001.5.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:33 /media/usb/revo_sda1_201001.6.dar
+-rwxrwxrwx 1 root 420M 2011-01-08 08:34 /media/usb/revo_sda1_201001.7.dar
+-rwxrwxrwx 1 root 8.2M 2011-01-08 08:34 /media/usb/revo_sda2_201001.1.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:43 /media/usb/revo_sda3_201001.1.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:50 /media/usb/revo_sda3_201001.2.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 08:57 /media/usb/revo_sda3_201001.3.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 09:06 /media/usb/revo_sda3_201001.4.dar
+-rwxrwxrwx 1 root 2.0G 2011-01-08 09:15 /media/usb/revo_sda3_201001.5.dar&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Acer Aspire Revo 3700 - unboxing</title>
+      <link>https://chriswayg.github.io/posts/2011/acer-aspire-revo-3700-unboxing/</link>
+      <pubDate>Sun, 09 Jan 2011 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2011/acer-aspire-revo-3700-unboxing/</guid>
+      <description>&lt;p&gt;My old HTPC is something that I call a &amp;ldquo;frankencomputer,&amp;rdquo; meaning it&amp;rsquo;s been upgraded in piecemeal fashion after various OEM parts failed over the years. It may look totally new, but inside it is the same limiting, loud hardware that I started off with circa 2003. I needed some new hotness, so I started looking for something with the following criteria:
+&lt;ul&gt;
+    &lt;li&gt;Small form factor - it had to fit into an entertainment center and &lt;em&gt;look good. &lt;/em&gt;I no longer want a huge ATX tower sitting in the middle of an otherwise sexy entertainment center.&lt;/li&gt;
+    &lt;li&gt;HD video and audio - it needed to be powerful enough to play 1080p video and decent audio (preferably SPDIF out). The old HTPC could barely play Hulu flash videos on low quality without coughing.&lt;/li&gt;
+    &lt;li&gt;Low noise - the old machine sounded like an airplane during takeoff, which is to say &lt;em&gt;not good&lt;/em&gt;. Any new machine must be quiet enough so that I don&amp;rsquo;t hear it when something is playing on it.&lt;/li&gt;
+    &lt;li&gt;Wireless AND wired - I wanted the possibility to wire a new machine to the network as well as the freedom to connect wirelessly should I want to go that route.&lt;/li&gt;
+&lt;/ul&gt;
+After a thorough search of Newegg and Amazon I settled on the &lt;a href=&#34;http://www.newegg.com/Product/Product.aspx?Item=N82E16883103297&#34;&gt;Acer Aspire Revo 3700&lt;/a&gt;. It met all of my criteria above with ease (thanks to an nvidia ION graphics processor) and was only $349. Plus, it came with a bluetooth keyboard and mouse - nice! I ordered it last Monday evening and it was on my kitchen table on Thursday:
+&lt;p style=&#34;text-align: center;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_001.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-582&#34; title=&#34;Revo inside!&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_001.jpg&#34; alt=&#34;Revo inside!&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Revo inside!&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;The box felt very solid, and after opening I knew why - the Revo box itself fills the majority of the Newegg box. Only two airbags were used to fill that empty space:
+&lt;p style=&#34;text-align: center;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_002.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-583&#34; title=&#34;Hello goodness&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_002.jpg&#34; alt=&#34;Hello goodness&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Hello goodness&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;After opening up the Revo box itself you can find the keyboard and mouse at the very bottom. I originally thought that I wouldn&amp;rsquo;t be using these, but the small form factor of each of these is making me think twice! Both are smaller than the bluetooth set that I currently use:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_003.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-584&#34; title=&#34;Small keyboard and mouse&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_003.jpg&#34; alt=&#34;Small keyboard and mouse&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Small keyboard and mouse&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a look at all the parts laid out on the table. Included with the stuff already mentioned is a laptop-like AC adapter, TV mount, vertical stand, some manuals, and of course the box itself. Yes, I was drooling:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_004.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-585&#34; title=&#34;All of it splayed out&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_004.jpg&#34; alt=&#34;All of it splayed out&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;All of it splayed out&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;The machine itself has a luster to it. It is dark blue. Here you can see the front of it - it has the SPDIF out, a card reader, and audio ports. On the bottom left you can see a small cleft where the power button is:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_005.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-586&#34; title=&#34;Revo Front&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_005.jpg&#34; alt=&#34;Revo Front&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Revo Front&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Turning it around 90 degrees you can see a USB on the top front and the plug for another USB nearby. The top also has vents for the super-quiet fan:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_006.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-587&#34; title=&#34;Revo Top&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_006.jpg&#34; alt=&#34;Revo Top&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Revo Top&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s where you see where all the magic happens. The back has all of the other USB ports, HDMI/VGA out, the ethernet port, and the AC adapter input:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_007.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-589&#34; title=&#34;Revo Back&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_007.jpg&#34; alt=&#34;Revo Back&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Revo Back&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;On the bottom you can find some more vents and the slot for the base (which comes with it):&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_008.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-590&#34; title=&#34;Revo Bottom&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_008.jpg&#34; alt=&#34;Revo Bottom&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Revo Bottom&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Here is what it looks like with the stand on it. Sexy, no?&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 700px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_009.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-591&#34; title=&#34;All grown up!&#34; src=&#34;https://chriswayg.github.io/uploads/2011/01/Revo_009.jpg&#34; alt=&#34;All grown up!&#34; width=&#34;700&#34; height=&#34;525&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;All grown up!&lt;/p&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating Playlists for my MP3 Collection</title>
+      <link>https://chriswayg.github.io/posts/2010/creating-playlists-for-my-mp3-collection/</link>
+      <pubDate>Sun, 07 Nov 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/creating-playlists-for-my-mp3-collection/</guid>
+      <description>&lt;p&gt;As I&amp;rsquo;ve mentioned &lt;a href=&#34;https://chriswayg.github.io/2010/11/abcde-a-better-cd-encoder/&#34;&gt;before&lt;/a&gt;, about two summers back I went through my whole CD collection and digitized it to MP3 format using a tool called ABCDE. What I didn&amp;rsquo;t mention in that post was that at the time I&amp;rsquo;d forgotten to create playlists automatically during the process. Bummer! I had all of these albums digitized, but whenever I wanted to play a particular album I&amp;rsquo;d have to add the folder through my music player or manually select all of the files to add to my playlist. That wasn&amp;rsquo;t too bad, but if you&amp;rsquo;ve had any experience with playlists in Windows Media Player, VLC, or even XMMS you&amp;rsquo;ll know that in practice it is just a pain to handle. For whatever reason it may be, the ordering of the album tracks on the playlist &lt;em&gt;&lt;strong&gt;always&lt;/strong&gt;&lt;/em&gt; gets messed up when adding manually or via folders. &lt;em&gt;&lt;strong&gt;Always!&lt;/strong&gt;&lt;/em&gt; Now, I know I can fix this simply by sorting by the ID3 metadata (click the &amp;ldquo;track number&amp;rdquo; column in most players to sort), but the point is that &lt;em&gt;I shouldn&amp;rsquo;t have to do this&lt;/em&gt;. I wanted a simple solution.&lt;/p&gt;
+
+&lt;p&gt;I get annoyed with these things pretty quickly, so I started thinking about how I could remedy the situation to save myself some time. Obviously I could investigate &lt;em&gt;why &lt;/em&gt;each of the players were failing to sort my properly named (and usually tagged) files, but that seemed like too much work. I thought a simple solution would be to create M3U (a &lt;a href=&#34;http://www.google.com/url?sa=t&amp;amp;source=web&amp;amp;cd=1&amp;amp;ved=0CBwQFjAA&amp;amp;url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FM3U&amp;amp;rct=j&amp;amp;q=m3u&amp;amp;ei=sMnWTOWRFMP-8AaXnPmZBg&amp;amp;usg=AFQjCNHVxaaNTKNnCiADQmd33edsMs0o4A&amp;amp;sig2=OU39DvcsU8FPv3XmFXfiiQ&amp;amp;cad=rja&#34;&gt;standard&lt;/a&gt; playlist format) playlist files in each album directory that would contain the exact track ordering of that particular album. That way to play an album all I&amp;rsquo;d need to do was double click on the playlist file and &lt;em&gt;voila!&lt;/em&gt; it would play it in the right order. This would also give me the ability to drag and drop multiple albums without having to worry about sort issues with having multiple track 1s (not too much of a problem with today&amp;rsquo;s players, but still).&lt;/p&gt;
+
+&lt;p&gt;I did a little research and found a tool to help me write the playlists. It&amp;rsquo;s a Python library called &lt;a href=&#34;http://www.google.com/url?sa=t&amp;amp;source=web&amp;amp;cd=1&amp;amp;ved=0CBkQFjAA&amp;amp;url=http%3A%2F%2Fcode.google.com%2Fp%2Fmutagen%2F&amp;amp;rct=j&amp;amp;q=mutagen&amp;amp;ei=FsvWTPb9IoT48AblrMjYDA&amp;amp;usg=AFQjCNHzts_jR6qh9C_NtJi1COJQEfqHWQ&amp;amp;sig2=eoawYstMNOwkQafn61uG1g&amp;amp;cad=rja&#34;&gt;mutagen&lt;/a&gt;, and it basically allowed me to programmatically read the metadata of Mp3 files to get the following information (among the many other things it can retrieve):
+&lt;ul&gt;
+    &lt;li&gt;Track number&lt;/li&gt;
+    &lt;li&gt;Artist name&lt;/li&gt;
+    &lt;li&gt;Album name&lt;/li&gt;
+    &lt;li&gt;Track length (seconds)&lt;/li&gt;
+&lt;/ul&gt;
+After installing mutagen, I wrote the following Python script (m3u.py) to traverse through a set of directories and create playlist files at the lowest level. For example, if I ran it on &lt;em&gt;/home/ant/Music/Coldplay/Parachutes&lt;/em&gt; I would end up with a playlist file inside the &lt;em&gt;Parachutes&lt;/em&gt; directory:&lt;/p&gt;
+
+&lt;p&gt;[python]
+#!/usr/bin/python&lt;/p&gt;
+
+&lt;p&gt;import os
+import sys
+import glob
+from mutagen.mp3 import MP3
+from mutagen.easyid3 import EasyID3&lt;/p&gt;
+
+&lt;p&gt;def makem3u(dir=&amp;quot;.&amp;quot;):
+    try:
+        print &amp;quot;Processing directory &amp;lsquo;%s&amp;rsquo;.&amp;quot; % dir
+        os.chdir(dir)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    # get ID3 meta objects for each mp3,
+    # store in a list
+    playlist = &#39;&#39;
+    mp3s = []
+    for file in glob.glob(&amp;amp;quot;*.[mM][pP]3&amp;amp;quot;):
+        if playlist == &#39;&#39;:
+            playlist = EasyID3(file)[&#39;album&#39;][0] + &#39;.m3u&#39;
+        meta_info = {
+            &#39;filename&#39;: file,
+            &#39;length&#39;: int(MP3(file).info.length),
+            &#39;tracknumber&#39;: EasyID3(file)[&#39;tracknumber&#39;][0].split(&#39;/&#39;)[0],
+        }
+        mp3s.append(meta_info)
+
+    if len(mp3s) &amp;amp;gt; 0:
+        print &amp;amp;quot;Writing playlist %s.&amp;amp;quot; % playlist
+
+        # write the playlist
+        of = open(playlist, &#39;w&#39;)
+        of.write(&amp;amp;quot;#EXTM3U\n&amp;amp;quot;)
+
+        # sorted by track number
+        for mp3 in sorted(mp3s, key=lambda mp3: int(mp3[&#39;tracknumber&#39;])):
+            of.write(&amp;amp;quot;#EXTINF:%s,%s\n&amp;amp;quot; % (mp3[&#39;length&#39;], mp3[&#39;filename&#39;]))
+            of.write(mp3[&#39;filename&#39;] + &amp;amp;quot;\n&amp;amp;quot;)
+
+        of.close()
+
+except:
+    print &amp;amp;quot;Error when trying to process directory &#39;%s&#39;. Ignoring...&amp;amp;quot; % dir
+    print &amp;amp;quot;Text:&amp;amp;quot;, sys.exc_info()[0]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;def main(argv = None):
+    if argv is None:
+        argv = sys.argv&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# directories containing music files
+dirs = []
+
+if len(sys.argv) == 2 and sys.argv[1] == &#39;-&#39;:
+# we do not have command line arguments,
+# so read from STDIN
+   for line in sys.stdin:
+       dirs.append(line.strip())
+else:
+# passed in directories on the command line
+    for dir in sys.argv[1:]:
+        dirs.append(dir)
+
+# for each directory passed to us, go
+# to it and make the M3U out of the
+# MP3 files there
+for dir in dirs:
+    makem3u(dir)
+
+return 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;if &lt;strong&gt;name&lt;/strong&gt; == &amp;quot;&lt;strong&gt;main&lt;/strong&gt;&amp;quot;:
+    sys.exit(main())
+[/python]&lt;/p&gt;
+
+&lt;p&gt;You can pass directories two ways this script - as arguments or via standard input. This allows me to do this:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;m3u.py /home/ant/Music/Coldplay/Parachutes&lt;/pre&gt;
+
+&lt;p&gt;&amp;hellip;or if I wanted to do a bunch of directories in bulk:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;find /home/ant/Music -type d -links 2 | m3u.py - &lt;/pre&gt;
+
+&lt;p&gt;Note that I made only a small attempt to make this script bulletproof. It gives a decent attempt to find the metadata in the MP3 files it finds in the directory, but if it encounters an error thrown by mutagen it dies out with an error message telling me the directory that failed and the exception it hit. Nine times out of ten (in my testing) the script will die because the tag information in the MP3s are malformed, which means that you wouldn&amp;rsquo;t want to create a playlist off of them using that info anyway.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>ABCDE - A Better CD Encoder</title>
+      <link>https://chriswayg.github.io/posts/2010/abcde-a-better-cd-encoder/</link>
+      <pubDate>Thu, 04 Nov 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/abcde-a-better-cd-encoder/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of automating things. In almost all aspects of my life you can find an example of me trying to free up some of my time by eliminating the mundane, repeatable steps with some automated process (think auto-billpay and programmable coffee makers). This is even more evident in my computer work - I don&amp;rsquo;t want to be typing in the same commands over and over! For one, all of that typing takes time, and time is something of which I have too little. For two, me having to manually type or click things out each time exposes whatever I&amp;rsquo;m doing to human error.&lt;/p&gt;
+
+&lt;p&gt;In this post I&amp;rsquo;d like to talk about one example of automation that I&amp;rsquo;ve used to save a lot of time: archiving of my CDs to MP3. I did this about two summers back when I was trying to archive my entire collection to an external hard drive I&amp;rsquo;d just bought (over 300 CDs between myself and my wife). My goal was to rip them all with:
+&lt;ul&gt;
+    &lt;li&gt;The same level of quality (the highest quality variable bitrate MP3)&lt;/li&gt;
+    &lt;li&gt;The same folder structure (&amp;lt;Artist&amp;gt;/&amp;lt;Album&amp;gt;/&amp;lt;Artist&amp;gt; - &amp;lt;Track Number&amp;gt; - &amp;lt;Track Name&amp;gt;.mp3)&lt;/li&gt;
+    &lt;li&gt;Meaningful meta-info (IDv3 tags)&lt;/li&gt;
+    &lt;li&gt;Playlists in the album folder (M3U files)&lt;/li&gt;
+&lt;/ul&gt;
+I started with a program called &lt;a href=&#34;http://en.wikipedia.org/wiki/K3b&#34;&gt;K3B&lt;/a&gt; that was more than adequate in terms of my goals above, but it just took too long. After about 10 CDs I realized that the amount time to rip this way wasn&amp;rsquo;t feasible (even with two CD drives to work with in the tower I was using). To Google I went, eventually finding a neat little program called ABCDE that seemed to fit the bill.
+&lt;h2&gt;Enter ABCDE&lt;/h2&gt;
+&lt;a href=&#34;http://code.google.com/p/abcde/&#34;&gt;ABCDE&lt;/a&gt; is a deceptively simple &lt;a href=&#34;http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29&#34;&gt;Bash&lt;/a&gt; script that packs a whole host of features: Mp3/FLAC/Ogg ripping, playlists, CDDB lookups, and file tagging. What made me choose it over everything else wasn&amp;rsquo;t its feature set per se, but rather that it can be customized and simplified such that you don&amp;rsquo;t have to type out your preferences every time; you essentially set up your preferences in a configuration file &lt;em&gt;&lt;strong&gt;once&lt;/strong&gt;&lt;/em&gt;, then forget about them! In the end I had my setup customized so that all I needed to do to rip my CDs was one of the following commands (depending on which drive the CD was loaded, of course):&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;
+ripcd
+ripdvd
+&lt;/pre&gt;
+
+&lt;p&gt;How did I get to that point, you ask? Configuration, of course! Read on&amp;hellip;
+&lt;h2&gt;Configuring ABCDE&lt;/h2&gt;
+After you install it (which I won&amp;rsquo;t cover here), ABCDE stores its default configuration in the appropriately named &lt;em&gt;/etc/abcde.conf&lt;/em&gt;.  I started off by editing this file to make sure that it did things exactly the way I wanted (see my goals above).  Here&amp;rsquo;s an annotated guide of what I changed in the default setup.
+&lt;h3&gt;Allow track padding&lt;/h3&gt;
+The visual presentation of my music files is important to me. This includes how they are sorted when they are sitting in their respective folders - I wanted them to be in the folder in the same order as they are in the album! By default ABCDE doesn&amp;rsquo;t pad their track numbers (should you put them in the filename), which leads to track number &amp;ldquo;10&amp;rdquo; being shown before track number &amp;ldquo;1&amp;rdquo; if the track number is the first significant difference to the file names. Padding the track names solves this issue (it makes track 1 appear with &amp;ldquo;01&amp;rdquo; in the filename) and provides me a consistent representation in my file browser. To enable this, make this change in your config:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;PADTRACKS=y&lt;/pre&gt;
+&lt;h3&gt;MP3 Encoding Parameters&lt;/h3&gt;
+To get the highest quality encoding out of ABCDE I have the following LAME option (LAME is what ABCDE uses to create MP3s):
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;LAMEOPTS=&amp;quot;-b 320&amp;quot;&lt;/pre&gt;
+
+&lt;p&gt;Let me say here that encoding parameters are extremely subjective. Some folks want lossless,  while others want huge space savings. What I want is the best possible  quality while staying within the constraints of the MP3 file format. I  do that because I think lossless (FLAC) just takes up too much space. I&amp;rsquo;m also lazy in that I don&amp;rsquo;t  want to convert to MP3 if I have it archived in a different format. If you are interested in exploring other MP3 options for ABCDE here, check out the &lt;a href=&#34;http://wiki.hydrogenaudio.org/index.php?title=LAME&#34;&gt;Hydrogenaudio Wiki&lt;/a&gt; for a pretty succinct breakdown of the other LAME options.
+&lt;h3&gt;Output Location&lt;/h3&gt;
+When I rip a CD, I want all of the output to go to a common location. That way I know where to look when (not if) things go wrong! Change the following options to specify where you&amp;rsquo;d like your files to go. Here I&amp;rsquo;m storing them in my home directory.&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;OUTPUTDIR=/home/ant
+WAVOUTPUTDIR=/home/ant/tmp&lt;/pre&gt;
+
+&lt;p&gt;You may want to change up your temporary directory to go to a more &lt;em&gt;temporary&lt;/em&gt; location like /tmp. For me I just keep it there.
+&lt;h3&gt;Output Format&lt;/h3&gt;
+Here&amp;rsquo;s where things get fun. Everyone has their own file naming scheme, and rightfully so. They are your files after all, right? I like to have the artist name as a top level directory, followed by the album name in another directory under that. For the actual music files (which get placed in the album folder), I like to - again - put the artist in the name in case I want to copy just those files to a USB drive. Here is the setting to make ABCDE create this structure:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;OUTPUTFORMAT=&#39;${ARTISTFILE}/${ALBUMFILE}/${ARTISTFILE} - ${TRACKNUM} - ${TRACKFILE}&#39;
+
+VAOUTPUTFORMAT=&#39;${ARTISTFILE}/${ALBUMFILE}/${ARTISTFILE} - ${TRACKNUM} - ${TRACKFILE}&#39;&lt;/pre&gt;
+
+&lt;p&gt;Note that there are two lines there. The first line is for normal albums with only one artist. The second is for music compilations where you have several different artists on the same CD. This is one area that I wish ABCDE did a little better - ideally I&amp;rsquo;d like to be able to specify my own &amp;ldquo;album artist&amp;rdquo; name instead of having folders for each artist on the CD, but I have another solution for that which I&amp;rsquo;ll cover in another post. For now I&amp;rsquo;m content with that flaw because I rarely purchase compilations.
+&lt;h3&gt;Playlists&lt;/h3&gt;
+As I said before, I want M3U playlists automatically whenever I rip a CD. This gives me a simple, one-click solution to playing an album without having to mess with bad sorting in whatever music player I&amp;rsquo;m using at the time (they all seem to mess it up). First, use this option to define the format of the M3U playlist. Here I am saying to create the file with the album as it&amp;rsquo;s name, to be stored in the album directory:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;PLAYLISTFORMAT=&#39;${ARTISTFILE}/${ALBUMFILE}/${ALBUMFILE}.m3u&#39;
+
+PLAYLISTFORMAT=&#39;${ARTISTFILE}/${ALBUMFILE}/${ALBUMFILE}.m3u&#39;
+
+&lt;/pre&gt;
+
+&lt;p&gt;Next, you need to tell ABCDE to actually create the playlist when you rip a CD (it doesn&amp;rsquo;t do this by default). Add this to do that:&lt;/p&gt;
+
+&lt;pre class=&#34;brush:bash;&#34;&gt;ACTIONS=cddb,read,encode,tag,move,playlist,clean&lt;/pre&gt;
+
+&lt;p&gt;Note that there&amp;rsquo;s a lot of other stuff going on before the playlist generation - that&amp;rsquo;s intended.
+&lt;h3&gt;Give Me My Space!&lt;/h3&gt;
+By default ABCDE converts spaces and forward slashes to underscores. I&amp;rsquo;m fine with the latter, but having underscore in the filename where a space should be is endlessly annoying to me (&amp;ldquo;Pink Floyd - 03 - Time.mp3&amp;rdquo; looks much better than &amp;ldquo;Pink&lt;em&gt;Floyd&lt;/em&gt;-&lt;em&gt;03&lt;/em&gt;-_Time.mp3,&amp;rdquo; don&amp;rsquo;t you think?). It&amp;rsquo;s 2010 for goodness sake! Computers have evolved to be able to handle spaces in file names! Replace the &amp;ldquo;mungefilename&amp;rdquo; function with this one to keep your spaces:&lt;/p&gt;
+
+&lt;p&gt;&lt;pre class=&#34;brush:bash;&#34;&gt;mungefilename ()
+{
+ echo &amp;quot;$@&amp;quot; | sed s,:,\ -,g | tr /* _+ | tr -d \&amp;rsquo;&amp;amp;quot;\?[:cntrl:]
+}&lt;/pre&gt;
+&lt;h3&gt;Setting Up Aliases&lt;/h3&gt;
+As I mentioned before, when I was using ABCDE heavily two summers ago I had aliases set up for each physical CD drive on my machine. If you don&amp;rsquo;t have two drives, don&amp;rsquo;t worry about this. If you do, and you think you&amp;rsquo;d get annoyed or tired of typing out which device from which to rip, define these aliases and put them in your ~/.bashrc. You&amp;rsquo;ll want to substitute your actual device names , of course (mine are /dev/dvd and /dev/cdrw):&lt;/p&gt;
+
+&lt;p&gt;&lt;pre class=&#34;brush:bash;&#34;&gt;alias ripcd=&amp;lsquo;abcde -d /dev/cdrw&amp;rsquo;&lt;/p&gt;
+
+&lt;p&gt;alias ripdvd=&amp;lsquo;abcde -d /dev/dvd&amp;rsquo;&lt;/pre&gt;
+&lt;h2&gt;All Together Now&lt;/h2&gt;
+Okay, so now that you have the configuration, let me show you how it looks in practice. Here I&amp;rsquo;ve put a CD (Fall Out Boy&amp;rsquo;s worst CD thus far, IMO)  in my CDRW drive and used my alias to start ABCDE. What appears first is the matching CDDB entries:
+&lt;p style=&#34;text-align: left;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 682px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_1.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-418 &#34; title=&#34;After executing &amp;quot;ripcd&amp;quot;&#34; src=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_1.jpg&#34; alt=&#34;After executing &amp;quot;ripcd&amp;quot;&#34; width=&#34;682&#34; height=&#34;400&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;After executing &amp;quot;ripcd&amp;quot;&lt;/p&gt;&lt;/div&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;After reviewing which entry looks like the best fit I choose #2 (mainly because it is listed as &amp;ldquo;rock&amp;rdquo; and not &amp;ldquo;misc&amp;rdquo;):&lt;/p&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 682px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_2.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-419 &#34; title=&#34;Choosing the second entry&#34; src=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_2.jpg&#34; alt=&#34;Choosing the second entry&#34; width=&#34;682&#34; height=&#34;400&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Choosing the second entry&lt;/p&gt;&lt;/div&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;I then answer a couple of questions - do I want to edit the CDDB entry (not this time, but you can with your editor of choice) and is this CD multi-artist (no again) - and it starts ripping:&lt;/p&gt;
+&lt;p style=&#34;text-align: center;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 682px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_3.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-420 &#34; title=&#34;Ripping started&#34; src=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_3.jpg&#34; alt=&#34;Ripping started&#34; width=&#34;682&#34; height=&#34;400&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Ripping started&lt;/p&gt;&lt;/div&gt;
+&lt;p style=&#34;text-align: left;&#34;&gt;When everything is done ABCDE will happily drop you back to your command prompt. Here I&amp;rsquo;m inspecting the files created after the rip finished. All looks well!&lt;/p&gt;
+&lt;p style=&#34;text-align: center;&#34;&gt;&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 717px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_4.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-421 &#34; title=&#34;Rip/encode done!&#34; src=&#34;https://chriswayg.github.io/uploads/2010/11/abcde_4.jpg&#34; alt=&#34;Rip/encode done!&#34; width=&#34;717&#34; height=&#34;441&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Rip/encode done!&lt;/p&gt;&lt;/div&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#39;Xonotic Player Interview: chooksta&#39;</title>
+      <link>https://chriswayg.github.io/posts/2010/xonotic-player-interview-chooksta/</link>
+      <pubDate>Sat, 23 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/xonotic-player-interview-chooksta/</guid>
+      <description>&lt;p&gt;I am happy to announce the first (of many, hopefully) player interviews, where you can hear players respond to my questions while you watch a sample of their actual gameplay. In this one I talk with chooksta, who is known to all of us in the Xonotic community as both a nice guy and a talented musician. We talk about how he first came to play the game, his music, and what he&amp;rsquo;s looking forward to in Xonotic. The gameplay sample is from a game on &amp;ldquo;mentalrespace&amp;rdquo; on an Australian server. I hope you all enjoy!&lt;/p&gt;
+
+&lt;iframe width=&#34;640&#34; height=&#34;360&#34; src=&#34;//www.youtube-nocookie.com/embed/XQ8qOVoyHfY&#34; frameborder=&#34;0&#34; allowfullscreen&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Enabling ClearType on Windows XP Pro</title>
+      <link>https://chriswayg.github.io/posts/2010/enabling-cleartype-on-windows-xp-pro/</link>
+      <pubDate>Fri, 22 Oct 2010 00:00:00 UTC</pubDate>
+      <author>Ant Zucaro</author>
+      <guid>https://chriswayg.github.io/posts/2010/enabling-cleartype-on-windows-xp-pro/</guid>
+      <description>&lt;p&gt;Until recently I hadn&amp;rsquo;t noticed the poor state of affairs in font rendering for XP (at least by default). I began to notice when I was implementing a new font for this website - the site just looked &lt;em&gt;weird &lt;/em&gt;when viewed in XP. No matter which browser I tried (IE, Firefox, and Chrome), the body text ended up looking both blocky and blurred at the same time! It was obviously something OS-specific, otherwise  I would have seen different behavior when I switched browsers (or it would look equally horrible in both Linux and Windows), but what was it?&lt;/p&gt;
+
+&lt;p&gt;After a small bit of Googling I came up with my answer: ClearType was disabled on my XP machine. What is ClearType, you ask? Well, &lt;a href=&#34;http://www.microsoft.com/typography/cleartypeinfo.mspx&#34;&gt;Microsoft touts it as&lt;/a&gt;:
+&lt;blockquote&gt;&amp;rdquo;&amp;hellip;an unprecedented innovation in font display technology                      that dramatically improves font display resolution and marks a genuine                      breakthrough in screen readability&amp;rdquo;&lt;/blockquote&gt;
+Well isn&amp;rsquo;t that a mouthful! Here&amp;rsquo;s my explanation: ClearType is a font-prettifier for Windows. What&amp;rsquo;s good is ClearType comes built into XP by default. What&amp;rsquo;s bad is that it is &lt;strong&gt;&lt;em&gt;disabled&lt;/em&gt;&lt;/strong&gt; by default. That&amp;rsquo;s not too big of a deal, though. You can get &amp;ldquo;purdy&amp;rdquo; fonts with minimal effort by simply enabling ClearType - you&amp;rsquo;re literally a couple of clicks away from making all (okay, not all, but most) of the text on your computer look better.&lt;/p&gt;
+
+&lt;p&gt;Notice that I just said &amp;ldquo;better.&amp;rdquo; Of course &amp;ldquo;better&amp;rdquo; is a totally subjective opinion of mine. Feel free to judge for yourself. To assist you in that process, here&amp;rsquo;s a before and after screenshot of one of my blog posts:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/10/before_and_after.png&#34;&gt;&lt;img class=&#34;aligncenter size-full wp-image-306&#34; title=&#34;before_and_after&#34; src=&#34;https://chriswayg.github.io/uploads/2010/10/before_and_after.png&#34; alt=&#34;&#34; width=&#34;908&#34; height=&#34;440&#34; /&gt;&lt;/a&gt;Can you see the difference? Does it matter to you? Do you like the right-hand side better? If you&amp;rsquo;ve answered yes to each of these questions, proceed!
+&lt;h2&gt;Enabling ClearType&lt;/h2&gt;
+To enable ClearType, first right click on your desktop to access the context menu there. You&amp;rsquo;ve probably seen it dozens of times when changing your desktop background, but here it is. Click on &amp;ldquo;properties&amp;rdquo;:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 197px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/10/1_properties_screen.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-313&#34; title=&#34;Desktop context menu&#34; src=&#34;https://chriswayg.github.io/uploads/2010/10/1_properties_screen.jpg&#34; alt=&#34;Desktop context menu&#34; width=&#34;197&#34; height=&#34;206&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Desktop context menu&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Then go to the &amp;ldquo;Appearance&amp;rdquo; tab and click on the &amp;ldquo;Effects&amp;hellip;&amp;rdquo; button:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 404px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/10/2_appearance_tab.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-314&#34; title=&#34;Appearance tab&#34; src=&#34;https://chriswayg.github.io/uploads/2010/10/2_appearance_tab.jpg&#34; alt=&#34;Appearance tab&#34; width=&#34;404&#34; height=&#34;455&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Appearance tab&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, in the effects popup, check the box that says &amp;ldquo;Use the following method to smooth edges of screen fonts&amp;rdquo; and click the &amp;ldquo;OK&amp;rdquo; button:&lt;/p&gt;
+
+&lt;div class=&#34;wp-caption aligncenter&#34; style=&#34;width: 414px&#34;&gt;&lt;a href=&#34;https://chriswayg.github.io/uploads/2010/10/2_effects_menu.jpg&#34;&gt;&lt;img class=&#34;size-full wp-image-315&#34; title=&#34;Effects menu&#34; src=&#34;https://chriswayg.github.io/uploads/2010/10/2_effects_menu.jpg&#34; alt=&#34;Effects menu&#34; width=&#34;414&#34; height=&#34;316&#34; /&gt;&lt;/a&gt;&lt;p class=&#34;wp-caption-text&#34;&gt;Effects menu&lt;/p&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
